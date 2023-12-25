@@ -8,7 +8,7 @@ class MessageController {
     #timeoutID;
     #notificationTimeoutID;
     #notificationEndTimeDate;
-    #delayPerCharacter = 100; //milliseconds
+    #delayPerCharacter = 70; //milliseconds
     constructor(afterPrayerMessages = [], morningEveningMessages = []) {
         this.#afterPrayerMessages = afterPrayerMessages;
         this.#morningEveningMessages = morningEveningMessages;

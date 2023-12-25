@@ -29,14 +29,14 @@
   --primary: rgb(2, 36, 87);
   --primary-transparent: rgb(255, 255, 255);
 
-  --message-font-size: max(3vw,4vh);
+  --message-font-size: max(2.8vw,3.5vh);
   --message-font-color: black;
   --message-bg-color: var(--primary-transparent);
   --message-border-color: var(--secondary);
   --message-footnote-color: red;
   --message-title-font-size:calc(var(--message-font-size) * 0.7);
 
-  --prayer-time-font-size: calc(Var(--message-font-size) * .55);
+  --prayer-time-font-size: calc(Var(--message-font-size) * .6);
   --prayer-time-font-color: black;
   --prayer-name-font-size: calc(Var(--message-font-size) * .6);
   --prayer-name-font-color: white;
