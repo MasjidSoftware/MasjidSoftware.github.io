@@ -1,0 +1,280 @@
+@font-face {
+  font-family: "KSA";
+  src: url("fonts/KSARegular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+:root {
+  /*Page Setting*/
+  --numbers-font: KSA;
+  --secondary: rgb(229, 175, 39);
+  --secondary-transparent: rgb(2, 53, 87, 0.925);
+  --primary: rgb(2, 36, 87);
+  --primary-transparent: rgb(255, 255, 255);
+
+  --message-font-size: max(3vw,4vh);
+  --message-font-color: black;
+  --message-bg-color: var(--primary-transparent);
+  --message-border-color: var(--secondary);
+  --message-footnote-color: red;
+  --message-title-font-size:calc(var(--message-font-size) * 0.7);
+
+  --prayer-time-font-size: calc(Var(--message-font-size) * .55);
+  --prayer-time-font-color: black;
+  --prayer-name-font-size: calc(Var(--message-font-size) * .6);
+  --prayer-name-font-color: white;
+
+  --prayer-group-bg-color: var(--secondary);
+  --prayer-group-border-color: white;
+
+  --pattern-bg-color-1: var(--secondary);
+  --pattern-bg-color-2: var(--primary);
+
+  --box-shadow-color: black;
+
+  --pattern-size: 2vw;
+}
+* {
+  font-family: KSA;
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 6px 0 var(--box-shadow-color);
+  transition: 0.3s;
+}
+html {
+  background-color: var(--pattern-bg-color-2);
+}
+body {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  direction: rtl;
+}
+.fullScreen {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  font-size: calc(var(--message-font-size) * 1.5);
+  color: white;
+  background-color: black;
+  justify-content: center;
+  display:flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: center;
+  display: none;
+}
+
+.theme-pattern-1 {
+  /*PATTERN*/
+
+  --_g: #0000 83%, var(--pattern-bg-color-1) 85% 99%, #0000 101%;
+  background: radial-gradient(27% 29% at right, var(--_g))
+      calc(var(--pattern-size) / 2) var(--pattern-size),
+    radial-gradient(27% 29% at left, var(--_g)) calc(var(--pattern-size) / -2)
+      var(--pattern-size),
+    radial-gradient(29% 27% at top, var(--_g)) 0 calc(var(--pattern-size) / 2),
+    radial-gradient(29% 27% at bottom, var(--_g)) 0
+      calc(var(--pattern-size) / -2) var(--pattern-bg-color-2);
+  background-size: calc(2 * var(--pattern-size)) calc(2 * var(--pattern-size));
+}
+.main {
+  padding: 5px 40px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.footer {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.prayer-group {
+  background-color: var(--prayer-group-bg-color);
+  border: 1px solid var(--prayer-group-border-color);
+  border-radius: 6px;
+  justify-content: space-around;
+  display: flex;
+}
+.notifications-container{
+    background-color: var(--prayer-group-bg-color);
+  border: 1px solid var(--prayer-group-border-color);
+  border-radius: 6px;
+  justify-content: space-around;
+  display: none;
+  padding: 8px 8px;
+}
+.notification{
+  font-size: var(--prayer-name-font-size);
+  color: var(--prayer-name-font-color);
+
+  
+}
+.notification-timer{
+    font-family: var(--numbers-font);
+  font-size: var(--prayer-time-font-size);
+  color: var(--prayer-time-font-color);
+  border-bottom: 3px solid var(--prayer-time-font-color);
+  border-radius: 3px;
+  padding: 0px 5px;
+  min-width: calc(var(--prayer-time-font-size)*3);
+  text-align: center;
+  direction: rtl;
+}
+
+.prayer-name {
+
+  font-size: var(--prayer-name-font-size);
+  color: var(--prayer-name-font-color);
+}
+.prayer-time {
+  font-family: var(--numbers-font);
+  font-size: var(--prayer-time-font-size);
+  color: var(--prayer-time-font-color);
+  letter-spacing: 0.15em;
+  border-bottom: 3px solid var(--prayer-time-font-color);
+  border-radius: 3px;
+  padding: 0px 5px;
+}
+.prayer {
+
+  text-align: center;
+  min-width: 55px;
+  margin: 8px;
+  display: inline;
+}
+.header-item {
+  margin: 1px;
+}
+.main-item {
+  flex-wrap: wrap;
+  font-size: var(--message-font-size);
+  color: var(--message-font-color);
+  background-color: var(--message-bg-color);
+  border: 2px solid var(--message-border-color);
+  border-radius: 5px;
+  padding: 10px 10px;
+}
+.message {
+    padding-left: 0.5em;
+    padding-right:0.5em;
+    animation: fadeIn 5s;
+    overflow: hidden;
+}
+.date {
+  font-family: var(--numbers-font);
+}
+.clock {
+  font-family: var(--numbers-font);
+  
+}
+.dhikerCount {
+  display: inline;
+  align-self: center;
+  text-align: center;
+  
+  border-radius: 50%;
+  margin: 0px 5px;
+  background-color: var(--message-border-color);
+  color: var(--message-bg-color);
+}
+.messageTitle{
+  
+display: inline-block;
+color: var(--secondary);
+font-size: var(--message-title-font-size);
+margin-bottom: 10px;
+border-bottom: 1px solid var(--secondary);
+padding-right:5px;
+padding-left:5px;
+}
+.messageTitleContainer{
+text-align:center;
+  
+}
+#messageIndex{
+  margin-right: 10px;
+
+}
+.messageText{
+text-align: justify;
+padding-bottom: 0.5em;
+}
+.messageCountContainer{
+font-size: calc(var(--message-font-size) * 0.6);
+padding-bottom:0.5em;
+}
+.messageCount{
+  margin: 2px 10px;
+  border-bottom: 2px solid var(--secondary);
+
+}
+ol {
+    list-style: arabic-indic;
+    padding-right:1em;
+    font-size: calc(var(--message-font-size) * 0.6);
+}
+sup{
+        font-size: calc(var(--message-font-size) * 0.6);
+    color:var(--message-footnote-color);
+}
+.messageFootnotesContainer{
+    border-top: 1.5px solid black;
+    padding-top:0.3em;
+    font-size: calc(var(--message-font-size) * 0.6);
+}
+.messageFootnotesTitle{
+}
+ol li::marker {
+    color: var(--message-footnote-color);
+}
+.braces{
+  color:var(--secondary);
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.quranOpeningContainer{
+  padding-bottom: 0.2em;
+  margin: 0px 0px;
+  text-align: center;
+}
+
+.progress {
+  height: 300px;
+  width: 500px;
+  margin-top: 20px;
+  background: linear-gradient(to right, black 99.99%, transparent), linear-gradient(to bottom, black 99.99%, transparent), linear-gradient(to right, black 99.99%, transparent), linear-gradient(to bottom, black 99.99%, transparent);
+  background-size: 100% 5px, 5px 100%, 100% 5px, 5px 100%;
+  background-repeat: no-repeat;
+  background-position: -500px 0px, 495px -300px, 500px 295px, 0px 300px;
+}
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Athkar</title>
+    <script type="text/javascript" src="MessageClasses.js"></script>
+    <script type="text/javascript" src="AfterPrayerMessages.js"></script>
+    <script type="text/javascript" src="MorningEveningMessages.js"></script>
+    <script type="text/javascript" src="AthanMessages.js"></script>
+    <script type="text/javascript" src="MessageControllerClass.js"></script>
+    <script type="text/javascript" src="PrayerEventClass.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="data/SA/wtimes-SA.AL-TAIF.js"></script>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body class="theme-pattern-1" onload="main()">
+    <div class="main">
+      <div class="main-item card message" id="message">
+       بسم الله الرحمن الرحيم
+      </div>
+    </div>
+    <div class="footer">
+      <div id="prayers" class="prayer-group card">
+        <div class="prayer">
+          <span class="prayer-name">الفجر</span>
+          <span class="prayer-time" id="fajrTime">0:00</span>
+        </div>
+        <div id="shrooq" class="prayer">
+          <span class="prayer-name">الشروق</span>
+          <span class="prayer-time" id="shroogTime">0:00</span>
+        </div>
+        <div class="prayer">
+          <span class="prayer-name" id="dhuhr">الظهر</span>
+          <span class="prayer-time" id="dhuhrTime">0:00</span>
+        </div>
+        <div class="prayer">
+          <span class="prayer-name">العصر</span>
+          <span class="prayer-time" id="asrTime">0:00</span>
+        </div>
+        <div class="prayer">
+          <span class="prayer-name">المغرب</span>
+          <span class="prayer-time" id="magribTime">0:00</span>
+        </div>
+        <div class="prayer">
+          <span class="prayer-name">العشاء</span>
+          <span class="prayer-time" id="eshaTime">0:00</span>
+        </div>
+      </div>
+      <div id="notifications" class="notifications-container">    
+         <div id="notification" class="notification">
+          اذان
+        </div>
+        <div id="notificationTimer" class="notification-timer">
+          0:00
+        </div>
+
+      </div>
+    </div>
+    <div class="fullScreen">
+      <div class="fullScreenFexContainer">
+          <div class="date" id="date"></div>
+          <div class="clock" id="clock"></div>
+      </div> 
+    </div>
+  </body>
+</html>
