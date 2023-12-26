@@ -38,7 +38,6 @@ function main() {
     setupGlobalElements();
     setInterval(startTime, 1000);
     messageController = new MessageController(afterPrayerMessages, morningEveningMessages);
-    messageController.startMorningEveningMessages();
 
 }
 function setupGlobalElements() {
@@ -172,6 +171,11 @@ function updatePrayerTimes(now) {
         eshaTime.setSeconds(0);
         eshaEvent = new PrayerEvent(eshaTime, "العشاء");
         eshaTimeElement.innerHTML = eshaEvent.getAthanTime();//getInArabicAMPM(dayPrayerTimes[5]);
+
+
+        //Default messages
+        if (!eshaEvent.isActive(now) && !maghribEvent.isActive(now) && !asrEvent.isActive(now) && !dhuhrEvent.isActive(now) && !fajrEvent.isActive(now))
+            messageController.startMorningEveningMessages();
     }
     if (missingDay) {
         //Missing day in timing table...
@@ -223,7 +227,7 @@ function updateTimeEvents(now) {
 function hasSystemTimeChanged(now) {
     if (previousDateReading === undefined) {
         previousDateReading = now;
-        console.log("Update Time Events - new timestamp");
+        //console.log("Update Time Events - new timestamp");
         updateTimeEvents(now);
     }
     else {
@@ -231,9 +235,9 @@ function hasSystemTimeChanged(now) {
 
         if (Math.abs(timeDifference) >= 60000) { // Fiftry second leniency
             updateTimeEvents(now);
-            console.log("Prev: " + previousDateReading);
-            console.log("Now: " + now)
-            console.log("Update Time Events - Time Diff " + (timeDifference / 1000));
+            //console.log("Prev: " + previousDateReading);
+            //console.log("Now: " + now)
+            //console.log("Update Time Events - Time Diff " + (timeDifference / 1000));
         }
         previousDateReading = now;
         isNewDay(now);
@@ -243,7 +247,7 @@ function isNewDay(now) {
     if (previousDateReading.toLocaleDateString(englishLocale, { day: "numeric" }) != now.toLocaleDateString(englishLocale, { day: "numeric" }) ||
         previousDateReading.toLocaleDateString(englishLocale, { month: "numeric" }) != now.toLocaleDateString(englishLocale, { month: "numeric" })) {
         updateTimeEvents(now);
-        console.log("Update Time Events - new day");
+        //console.log("Update Time Events - new day");
 
     }
 }
