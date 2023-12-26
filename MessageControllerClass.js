@@ -5,14 +5,15 @@ class MessageController {
     #athanMessages;
     #currentMessages;
     #currentMessagesIndex = 0;
-    #timeoutID;
-    #notificationTimeoutID;
+    timeoutID;
+    notificationTimeoutID;
     #notificationEndTimeDate;
     #delayPerCharacter = 70; //milliseconds
     constructor(afterPrayerMessages = [], morningEveningMessages = []) {
         this.#afterPrayerMessages = afterPrayerMessages;
         this.#morningEveningMessages = morningEveningMessages;
         this.#athanMessages = athanMessages;
+        this.startMorningEveningMessages();
     }
     startAfterPrayerMessages() {
         if (this.#currentMessages === undefined || this.#currentMessages[0].type !== this.#afterPrayerMessages[0].type) {
@@ -23,7 +24,7 @@ class MessageController {
         }
     }
     startMorningEveningMessages() {
-        if (this.#currentMessages === undefined || this.#currentMessages[0].type !== this.#morningEveningMessages[0]) {
+        if (this.#currentMessages === undefined || this.#currentMessages[0].type !== this.#morningEveningMessages[0].type) {
             clearTimeout(this.timeoutID);
             this.#currentMessages = this.#morningEveningMessages;
             this.#currentMessagesIndex = 0;
@@ -32,7 +33,7 @@ class MessageController {
 
     }
     startAthanMessages() {
-        if (this.#currentMessages === undefined || this.#currentMessages[0].type !== this.#athanMessages[0]) {
+        if (this.#currentMessages === undefined || this.#currentMessages[0].type !== this.#athanMessages[0].type) {
             clearTimeout(this.timeoutID);
             this.#currentMessages = this.#athanMessages;
             this.#currentMessagesIndex = 0;
@@ -44,8 +45,8 @@ class MessageController {
         messageElement.style.animation = "fadeIn 1.6s";
         //wait for fadout
 
-        setTimeout(() => {
-
+        this.timeoutID = setTimeout(() => {
+            clearTimeout(messageController.timeoutID);
             messageElement.innerHTML = messageController.#currentMessages[messageController.#currentMessagesIndex].elements;
 
             messageElement.style.animation = "fadeIn 1.6s";
@@ -59,16 +60,16 @@ class MessageController {
             messageController.#currentMessagesIndex++;
             if (messageController.#currentMessagesIndex > messageController.#currentMessages.length - 1)
                 messageController.#currentMessagesIndex = 0;
-            messageController.#timeoutID = setTimeout(messageController.#displayMessage, delay);
+            messageController.timeoutID = setTimeout(messageController.#displayMessage, delay);
         }, 1000);
     }
     displayNotification(endDateTime, text = "NO TEXT") {
-        clearInterval(messageController.#notificationTimeoutID);
+        clearInterval(messageController.notificationTimeoutID);
         messageController.#notificationEndTimeDate = endDateTime;
         notificationElement.innerHTML = text;
         notificationsElement.style.display = "flex";
         prayersElement.style.display = "none";
-        messageController.#notificationTimeoutID = setInterval(function () {
+        messageController.notificationTimeoutID = setInterval(function () {
 
             // Get today's date and time
             let now = new Date().getTime();
@@ -88,7 +89,7 @@ class MessageController {
                 notificationTimerElement.innerHTML = "الآن";
             }
             if (distance < -30000) {
-                clearInterval(messageController.#notificationTimeoutID);
+                clearInterval(messageController.notificationTimeoutID);
                 notificationsElement.style.display = "none";
                 prayersElement.style.display = "";
             }
