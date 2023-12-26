@@ -49,8 +49,8 @@ class PrayerEvent {
         if (now < this.iqamaTime) {
             notificationTime.setSeconds(notificationTime.getSeconds() - Math.min(this.#countdownSeconds, ((this.iqamaTime - now) / 1000)));
 
-            console.log(this.eventName + " iqama " + this.iqamaTime)
-            console.log(this.eventName + " iqama notification " + notificationTime);
+            //console.log(this.eventName + " iqama " + this.iqamaTime)
+            //console.log(this.eventName + " iqama notification " + notificationTime);
             this.iqamaNotificationTimeoutID = setTimeout((time, eventName) => {
                 messageController.displayNotification(time, eventName);
             }, notificationTime - now, this.iqamaTime, "إقامة " + this.eventName);
@@ -65,8 +65,8 @@ class PrayerEvent {
         if (now < this.athanTime) {
             notificationTime.setSeconds(notificationTime.getSeconds() - Math.min(this.#countdownSeconds, ((this.athanTime - now) / 1000)));
 
-            console.log(this.eventName + " athan " + this.athanTime)
-            console.log(this.eventName + " athan notification " + notificationTime);
+            //console.log(this.eventName + " athan " + this.athanTime)
+            //console.log(this.eventName + " athan notification " + notificationTime);
             this.athanNotificationTimeoutID = setTimeout((time, eventName) => {
                 messageController.displayNotification(time, eventName);
                 messageController.startAthanMessages();
@@ -80,7 +80,7 @@ class PrayerEvent {
         let now = new Date();
         if (now < this.prayerEndTime) {
 
-            console.log(this.eventName + " prayer-end " + this.prayerEndTime);
+            //console.log(this.eventName + " prayer-end " + this.prayerEndTime);
             this.prayerEndTimeoutID = setTimeout(() => {
                 messageController.startAfterPrayerMessages();
             }, this.prayerEndTime - new Date());
@@ -94,7 +94,7 @@ class PrayerEvent {
         let now = new Date();
         if (now < this.afterPrayerAthkarEndTime) {
 
-            console.log(this.eventName + " backToNormal " + this.afterPrayerAthkarEndTime);
+            //console.log(this.eventName + " backToNormal " + this.afterPrayerAthkarEndTime);
             this.backToNormalTimeoutID = setTimeout(() => {
                 messageController.startMorningEveningMessages();
             }, this.afterPrayerAthkarEndTime - new Date());
