@@ -29,7 +29,9 @@ var prayersElement;
 var notificationElement;
 var notificationTimerElement;
 var messageIndexElement;
-
+var primary;
+var secondary;
+var secondaryLight;
 
 
 
@@ -41,6 +43,13 @@ function main() {
 
 }
 function setupGlobalElements() {
+    //get default CSS colors
+    var bodyStyles = window.getComputedStyle(document.body);
+    primary = bodyStyles.getPropertyValue('--primary');
+    secondary = bodyStyles.getPropertyValue('--secondary');
+    secondaryLight = bodyStyles.getPropertyValue('--secondary-light');
+
+
     messageElement = document.getElementById("message");
     clockElment = document.getElementById("clock");
     dateElement = document.getElementById("date");
@@ -252,24 +261,10 @@ function isNewDay(now) {
     }
 }
 function setProgress(percentage) {
-    let totalLength = (progressElement.offsetWidth * 2) + (progressElement.offsetHeight * 2);
-    input = (percentage > 1) ? 1 : percentage;
-    input = (percentage < 0) ? 0 : percentage;
-
-    borderLen = (input / 100) * totalLength;
-    if (borderLen <= progressElement.offsetWidth) {
-        backgroundPos = 'background-position: ' + (-500 + borderLen) + 'px 0px, 495px -300px, 500px 295px, 0px 300px';
-        progressElement.setAttribute('style', backgroundPos);
-    } else if (borderLen <= (progressElement.offsetWidth + progressElement.offsetHeight)) {
-        backgroundPos = 'background-position: 0px 0px, 495px ' + (-300 + (borderLen - progressElement.offsetWidth)) + 'px, 500px 295px, 0px 300px';
-        progressElement.setAttribute('style', backgroundPos);
-    } else if (borderLen <= (progressElement.offsetWidth * 2 + progressElement.offsetHeight)) {
-        backgroundPos = 'background-position: 0px 0px, 495px 0px, ' + (500 - (borderLen - progressElement.offsetWidth - progressElement.offsetHeight)) + 'px 295px, 0px 300px';
-        progressElement.setAttribute('style', backgroundPos);
-    } else {
-        backgroundPos = 'background-position: 0px 0px, 495px 0px, 0px 295px, 0px ' + (300 - (borderLen - (progressElement.offsetWidth * 2) - progressElement.offsetHeight)) + 'px';
-        progressElement.setAttribute('style', backgroundPos);
-    }
+    percentage = (percentage > 100) ? 100 : percentage;
+    percentage = (percentage < 0) ? 0 : percentage;
+    let percentageRemaining = 100 - percentage;
+    notificationsElement.style.background = "linear-gradient(90deg, " + secondary + " " + percentage + "%, " + secondaryLight + " " + percentageRemaining + "%)";
 }
 function prefixZero(n) {
     return n < 10 ? '0' + n : '' + n;

@@ -7,7 +7,8 @@ class MessageController {
     #currentMessagesIndex = 0;
     timeoutID;
     notificationTimeoutID;
-    #notificationEndTimeDate;
+    notificationEndTimeDate;
+    notificationRegisteredTimeDate;
     #delayPerCharacter = 70; //milliseconds
     constructor(afterPrayerMessages = [], morningEveningMessages = []) {
         this.#afterPrayerMessages = afterPrayerMessages;
@@ -65,7 +66,8 @@ class MessageController {
     }
     displayNotification(endDateTime, text = "NO TEXT") {
         clearInterval(messageController.notificationTimeoutID);
-        messageController.#notificationEndTimeDate = endDateTime;
+        messageController.notificationEndTimeDate = endDateTime;
+        messageController.notificationRegisteredTimeDate = new Date();
         notificationElement.innerHTML = text;
         notificationsElement.style.display = "flex";
         prayersElement.style.display = "none";
@@ -75,7 +77,9 @@ class MessageController {
             let now = new Date().getTime();
 
             // Find the distance between now and the count down date
-            let distance = messageController.#notificationEndTimeDate - now;
+            let distance = messageController.notificationEndTimeDate - now;
+            let totalDistance = messageController.notificationEndTimeDate - messageController.notificationRegisteredTimeDate;
+            setProgress(100 - Math.ceil((distance / totalDistance) * 100));
 
             // Time calculations for days, hours, minutes and seconds
             let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));

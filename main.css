@@ -25,7 +25,7 @@
   /*Page Setting*/
   --numbers-font: KSA;
   --secondary: rgb(229, 175, 39);
-  --secondary-transparent: rgb(2, 53, 87, 0.925);
+  --secondary-light: rgb(177, 177, 177);
   --primary: rgb(2, 36, 87);
   --primary-transparent: rgb(255, 255, 255);
 
@@ -276,13 +276,4 @@ ol li::marker {
   text-align: center;
 }
 
-.progress {
-  height: 300px;
-  width: 500px;
-  margin-top: 20px;
-  background: linear-gradient(to right, black 99.99%, transparent), linear-gradient(to bottom, black 99.99%, transparent), linear-gradient(to right, black 99.99%, transparent), linear-gradient(to bottom, black 99.99%, transparent);
-  background-size: 100% 5px, 5px 100%, 100% 5px, 5px 100%;
-  background-repeat: no-repeat;
-  background-position: -500px 0px, 495px -300px, 500px 295px, 0px 300px;
-}
 
