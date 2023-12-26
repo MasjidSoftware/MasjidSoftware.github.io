@@ -101,17 +101,8 @@ class PrayerEvent {
         }
 
     }
-    isAthanTime(now) {
-        return this.athanTime < now && now < new Date(this.athanTime.getTime()).setMinutes(this.athanTime.getMinutes() + 1);
-    }
-    isIqamaTime(now) {
-        return this.iqamaTime < now && now < new Date(this.iqamaTime.getTime()).setMinutes(this.iqamaTime.getMinutes() + 1);
-    }
-    isPrayerTime(now) {
-        return this.prayerEndTime < now && now < new Date(this.prayerEndTime.getTime()).setMinutes(this.prayerEndTime.getMinutes() + 1);
-    }
     isActive(now) {
-        return now >= this.athanTime && now <= this.prayerEndTime;
+        return now >= this.athanTime && now <= this.afterPrayerAthkarEndTime;
     }
     getAthanTime() {
         return this.athanTime.toLocaleString(arabicLocale, {
