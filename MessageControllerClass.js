@@ -53,7 +53,7 @@ class MessageController {
 
             messageIndexElement = document.getElementById("messageIndex");
 
-            messageIndexElement.innerHTML = EntoAr((messageController.#currentMessagesIndex + 1) + "/" + (messageController.#currentMessages.length));
+            messageIndexElement.innerHTML = EntoAr((messageController.#currentMessagesIndex + 1) + " من " + (messageController.#currentMessages.length));
             //________________________________
             let delay = messageController.#currentMessages[messageController.#currentMessagesIndex].messageCharacters * messageController.#delayPerCharacter;
             messageController.#currentMessagesIndex++;
