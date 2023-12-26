@@ -45,8 +45,8 @@ class PrayerEvent {
         clearTimeout(this.iqamaTimeoutID);
         clearTimeout(this.iqamaNotificationTimeoutID);
         let now = new Date();
+        let notificationTime = new Date(this.iqamaTime.getTime());
         if (now < this.iqamaTime) {
-            let notificationTime = new Date(this.iqamaTime.getTime());
             notificationTime.setSeconds(notificationTime.getSeconds() - Math.min(this.#countdownSeconds, ((this.iqamaTime - now) / 1000)));
 
             console.log(this.eventName + " iqama " + this.iqamaTime)
@@ -61,8 +61,8 @@ class PrayerEvent {
         clearTimeout(this.athanTimeoutID);
         clearTimeout(this.athanNotificationTimeoutID);
         let now = new Date();
+        let notificationTime = new Date(this.athanTime.getTime());
         if (now < this.athanTime) {
-            let notificationTime = new Date(this.athanTime.getTime());
             notificationTime.setSeconds(notificationTime.getSeconds() - Math.min(this.#countdownSeconds, ((this.athanTime - now) / 1000)));
 
             console.log(this.eventName + " athan " + this.athanTime)
@@ -71,6 +71,8 @@ class PrayerEvent {
                 messageController.displayNotification(time, eventName);
                 messageController.startAthanMessages();
             }, notificationTime - now, this.athanTime, "أذان " + this.eventName);
+        } else if (now < this.iqamaTime) {
+            messageController.startAthanMessages();
         }
     }
     setPrayerEndTimeout() {
@@ -82,6 +84,8 @@ class PrayerEvent {
             this.prayerEndTimeoutID = setTimeout(() => {
                 messageController.startAfterPrayerMessages();
             }, this.prayerEndTime - new Date());
+        } else if (now < this.afterPrayerAthkarEndTime) {
+            messageController.startAfterPrayerMessages();
         }
 
     }
