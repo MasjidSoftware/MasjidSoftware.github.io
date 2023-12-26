@@ -12,10 +12,11 @@ class Message {
     messageCharacters = 0;
     type;
     constructor(title = "بدون عنوان", text = "الدعاء", footnotes = [], footnotesTitle = "", basmallah = false, taooth = false) {
-        this.messageCharacters += title.trim().length + text.trim().length + footnotesTitle.trim().length;
+        this.messageCharacters += title.trim().length + text.trim().length;
+        //this.messageCharacters += footnotesTitle.trim().length;
         for (let i = 0; i < footnotes.length; i++) {
             footnotes[i] = EntoAr(footnotes[i].trim()).replaceAll("/", "/&rlm;");
-            this.messageCharacters += footnotes[i].length;
+            //this.messageCharacters += footnotes[i].length;
         }
         this.title = title;
         this.text = EntoAr(text).replaceAll("(", "<sup>").replaceAll(")", "</sup>");
@@ -40,7 +41,10 @@ class Message {
         let textStart = "<div class='messageText'>";
         let textEnd = "</div>";
         let text = textStart + this.text + textEnd;
-        return title + text + repeat + this.#getFootnoteElements();
+        if (repeat != undefined)
+            return title + text + repeat + this.#getFootnoteElements();
+        else
+            return title + text + this.#getFootnoteElements();
     }
     #getFootnoteElements() {
         let elements = "";
@@ -142,6 +146,16 @@ class MorningEveningMessage extends Message {
             prayerContainer = "<div class='messageCountContainer lang='ar'>" + "يكرر " + prayerContainer + "</div>";
         return prayerContainer;
     }
+}
+class BasicMessage extends Message {
 
+    constructor(title = "بدون عنوان", text = "الدعاء", type, footnotes = [], footnotesTitle = "", basmallah = false, taooth = false) {
+        super(title, text, footnotes, footnotesTitle, basmallah, taooth);
+        this.type = type;
+        this.createElements();
+    }
+    createElements() {
+        this.elements = super.createElements();
+    }
 
 }
