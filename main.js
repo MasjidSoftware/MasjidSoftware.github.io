@@ -31,7 +31,6 @@ var notificationTimerElement;
 var messageIndexElement;
 var primary;
 var secondary;
-var secondaryLight;
 
 
 
@@ -47,7 +46,6 @@ function setupGlobalElements() {
     var bodyStyles = window.getComputedStyle(document.body);
     primary = bodyStyles.getPropertyValue('--primary');
     secondary = bodyStyles.getPropertyValue('--secondary');
-    secondaryLight = bodyStyles.getPropertyValue('--secondary-light');
 
 
     messageElement = document.getElementById("message");
@@ -261,10 +259,13 @@ function isNewDay(now) {
     }
 }
 function setProgress(percentage) {
+    percentage = Math.ceil(percentage);
     percentage = (percentage > 100) ? 100 : percentage;
     percentage = (percentage < 0) ? 0 : percentage;
+    console.log(percentage);
     let percentageRemaining = 100 - percentage;
-    notificationsElement.style.background = "linear-gradient(90deg, " + secondary + " " + percentage + "%, " + secondaryLight + " " + percentageRemaining + "%)";
+    console.log(percentageRemaining);
+    notificationsElement.style.background = "linear-gradient(-90deg, " + secondary + " " + percentage + "%, AntiqueWhite " + percentage + "%)";
 }
 function prefixZero(n) {
     return n < 10 ? '0' + n : '' + n;

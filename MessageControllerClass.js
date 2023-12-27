@@ -79,7 +79,7 @@ class MessageController {
             // Find the distance between now and the count down date
             let distance = messageController.notificationEndTimeDate - now;
             let totalDistance = messageController.notificationEndTimeDate - messageController.notificationRegisteredTimeDate;
-            setProgress(100 - Math.ceil((distance / totalDistance) * 100));
+            setProgress(100 - ((distance / totalDistance) * 100));
 
             // Time calculations for days, hours, minutes and seconds
             let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
