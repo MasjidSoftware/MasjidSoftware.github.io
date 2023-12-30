@@ -5,22 +5,15 @@
   font-style: normal;
   font-display: swap;
 }
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.fadeIn {
+  transition-duration: 1.8s;
+  opacity: 1;
 }
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+.fadeOut {
+  transition-duration: 1.8s;
+  opacity: 0.1;
 }
+
 :root {
   /*Page Setting*/
   --numbers-font: KSA;
@@ -58,8 +51,8 @@
 }
 .card {
   /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 6px 0 var(--box-shadow-color);
-  transition: 0.3s;
+  box-shadow: 2px 5px 5px 2px var(--box-shadow-color);
+  transition-duration: 0s;
 }
 html {
   background-color: var(--pattern-bg-color-2);

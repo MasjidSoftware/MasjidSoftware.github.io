@@ -53,7 +53,10 @@ class PrayerEvent {
             //console.log(this.eventName + " iqama notification " + notificationTime);
             this.iqamaNotificationTimeoutID = setTimeout((time, eventName) => {
                 messageController.displayNotification(time, eventName);
+                messageController.prayerPause();
             }, notificationTime - now, this.iqamaTime, "إقامة " + this.eventName);
+        } else if (now < this.prayerEndTime) {
+            messageController.prayerPause();
         }
 
     }
@@ -82,9 +85,11 @@ class PrayerEvent {
 
             //console.log(this.eventName + " prayer-end " + this.prayerEndTime);
             this.prayerEndTimeoutID = setTimeout(() => {
+                messageController.prayerUnpause();
                 messageController.startAfterPrayerMessages();
             }, this.prayerEndTime - new Date());
         } else if (now < this.afterPrayerAthkarEndTime) {
+            messageController.prayerUnpause();
             messageController.startAfterPrayerMessages();
         }
 

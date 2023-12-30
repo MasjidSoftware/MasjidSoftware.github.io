@@ -43,14 +43,16 @@ class MessageController {
 
     }
     #displayMessage() {
-        messageElement.style.animation = "fadeIn 1.6s";
+        mainElement.classList.remove("fadeIn");
+        mainElement.classList.add("fadeOut");
         //wait for fadout
 
         this.timeoutID = setTimeout(() => {
             clearTimeout(messageController.timeoutID);
             messageElement.innerHTML = messageController.#currentMessages[messageController.#currentMessagesIndex].elements;
 
-            messageElement.style.animation = "fadeIn 1.6s";
+            mainElement.classList.remove("fadeOut");
+            mainElement.classList.add("fadeIn");
             //---------------------------- CHECK
 
             messageIndexElement = document.getElementById("messageIndex");
@@ -62,7 +64,7 @@ class MessageController {
             if (messageController.#currentMessagesIndex > messageController.#currentMessages.length - 1)
                 messageController.#currentMessagesIndex = 0;
             messageController.timeoutID = setTimeout(messageController.#displayMessage, delay);
-        }, 1000);
+        }, 1500);
     }
     displayNotification(endDateTime, text = "NO TEXT") {
         clearInterval(messageController.notificationTimeoutID);
@@ -98,6 +100,19 @@ class MessageController {
                 prayersElement.style.display = "";
             }
         }, 1000);
+    }
+    prayerPause() {
+        clearTimeout(this.timeoutID);
+        mainElement.classList.remove("fadeIn");
+        footerElement.classList.remove("fadeIn");
+        mainElement.classList.add("fadeOut");
+        footerElement.classList.add("fadeOut");
+    }
+    prayerUnpause() {
+        mainElement.classList.remove("fadeOut");
+        footerElement.classList.remove("fadeOut");
+        mainElement.classList.add("fadeIn");
+        footerElement.classList.add("fadeIn");
     }
 
 

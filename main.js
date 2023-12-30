@@ -3,7 +3,9 @@ var englishLocale = "en-SA";
 var arabicLocale = "ar-SA";
 
 //-----End of Settings-------
+var mainElement;
 var messageElement;
+var footerElement;
 var clockElment;
 var dateElement;
 var dhuhrNameElement;
@@ -47,8 +49,10 @@ function setupGlobalElements() {
     primary = bodyStyles.getPropertyValue('--primary');
     secondary = bodyStyles.getPropertyValue('--secondary');
 
-
+    mainElement = document.getElementById("main");
     messageElement = document.getElementById("message");
+    footerElement = document.getElementById("footer");
+
     clockElment = document.getElementById("clock");
     dateElement = document.getElementById("date");
     dhuhrNameElement = document.getElementById("dhuhr");
@@ -270,6 +274,7 @@ function setProgress(percentage) {
 function prefixZero(n) {
     return n < 10 ? '0' + n : '' + n;
 }
+
 
 
 
