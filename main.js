@@ -31,8 +31,9 @@ var prayersElement;
 var notificationElement;
 var notificationTimerElement;
 var messageIndexElement;
-var primary;
-var secondary;
+var primaryColor;
+var secondaryColor;
+var messageBgColor;
 
 
 
@@ -46,8 +47,9 @@ function main() {
 function setupGlobalElements() {
     //get default CSS colors
     var bodyStyles = window.getComputedStyle(document.body);
-    primary = bodyStyles.getPropertyValue('--primary');
-    secondary = bodyStyles.getPropertyValue('--secondary');
+    primaryColor = bodyStyles.getPropertyValue('--primary');
+    secondaryColor = bodyStyles.getPropertyValue('--secondary');
+    messageBgColor = bodyStyles.getPropertyValue('--message-bg-color');
 
     mainElement = document.getElementById("main");
     messageElement = document.getElementById("message");
@@ -269,7 +271,7 @@ function setProgress(percentage) {
     console.log(percentage);
     let percentageRemaining = 100 - percentage;
     console.log(percentageRemaining);
-    notificationsElement.style.background = "linear-gradient(-90deg, " + secondary + " " + percentage + "%, AntiqueWhite " + percentage + "%)";
+    notificationsElement.style.background = "linear-gradient(-90deg, " + secondaryColor + " " + percentage + "%, " + messageBgColor + " " + percentage + "%)";
 }
 function prefixZero(n) {
     return n < 10 ? '0' + n : '' + n;
