@@ -1,7 +1,7 @@
 class PrayerEvent {
     athanTimeoutID;
-    iqamaTimeoutID;
     prayerEndTimeoutID;
+    prayerPauseTimeoutID;
     backToNormalTimeoutID;
 
     athanNotificationTimeoutID;
@@ -11,6 +11,7 @@ class PrayerEvent {
     iqamaTime;
     prayerEndTime;
     afterPrayerAthkarEndTime;
+    prayerPauseTime;
 
     eventName;
     iqamaMinutesDelay;
@@ -27,6 +28,7 @@ class PrayerEvent {
         if (eventName != "الشروق") {
             this.setAthanTimeout();
             this.setIqamaTimeout();
+            this.setPrayerPauseTimeout();
             this.setPrayerEndTimeout();
             this.setBackToNormalTimeout();
         }
@@ -39,10 +41,11 @@ class PrayerEvent {
         this.prayerEndTime.setMinutes(entryDateTime.getMinutes() + this.iqamaMinutesDelay + this.prayerMinutesDuration);
         this.afterPrayerAthkarEndTime = new Date(entryDateTime.getTime());
         this.afterPrayerAthkarEndTime.setMinutes(entryDateTime.getMinutes() + this.iqamaMinutesDelay + this.prayerMinutesDuration + this.afterPrayerAthkarMinutesDuration);
-
+        this.prayerPauseTime = new Date(entryDateTime.getTime());
+        this.prayerPauseTime.setMinutes(entryDateTime.getMinutes() + this.iqamaMinutesDelay);
+        this.prayerPauseTime.setSeconds(this.prayerPauseTime.getSeconds() + 30);
     }
     setIqamaTimeout() {
-        clearTimeout(this.iqamaTimeoutID);
         clearTimeout(this.iqamaNotificationTimeoutID);
         let now = new Date();
         let notificationTime = new Date(this.iqamaTime.getTime());
@@ -55,10 +58,19 @@ class PrayerEvent {
                 messageController.displayNotification(time, eventName);
                 messageController.prayerPause();
             }, notificationTime - now, this.iqamaTime, "إقامة " + this.eventName);
+        }
+
+    }
+    setPrayerPauseTimeout() {
+        clearTimeout(this.prayerPauseTimeoutID);
+        let now = new Date();
+        if (now < this.prayerPauseTime) {
+            this.prayerPauseTimeoutID = setTimeout(() => {
+                messageController.prayerPause();
+            }, this.prayerPauseTime - new Date());
         } else if (now < this.prayerEndTime) {
             messageController.prayerPause();
         }
-
     }
     setAthanTimeout() {
         clearTimeout(this.athanTimeoutID);
