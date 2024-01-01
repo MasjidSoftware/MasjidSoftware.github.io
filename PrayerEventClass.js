@@ -64,7 +64,6 @@ class PrayerEvent {
             //console.log(this.eventName + " iqama notification " + notificationTime);
             this.iqamaNotificationTimeoutID = setTimeout((time, eventName) => {
                 messageController.displayNotification(time, eventName);
-                messageController.prayerPause();
             }, notificationTime - now, this.iqamaTime, (this.eventName != "الجمعة" ? "إقامة " : "أذان ") + this.eventName);
         }
 
