@@ -18,10 +18,10 @@
   /*Page Setting*/
   --numbers-font: KSA;
   --secondary: rgb(229, 171, 23); /*rgb(229, 175, 39);*/
-  --primary: rgb(2, 36, 87);
+  --primary: rgb(157, 157, 157);
   --primary-transparent: rgb(255, 255, 255);
 
-  --message-font-size: max(3.2vw, 3.5vh);
+  --message-font-size: max(3.5vw, 3.5vh);
   --message-font-color: black;
   --message-bg-color: var(--primary-transparent);
   --message-border-color: var(--secondary);
@@ -51,7 +51,7 @@
 }
 .card {
   /* Add shadows to create the "card" effect */
-  box-shadow: 2px 5px 5px 2px var(--box-shadow-color);
+  box-shadow: 2px 3px 2px 2px var(--box-shadow-color);
   transition-duration: 0s;
 }
 html {
