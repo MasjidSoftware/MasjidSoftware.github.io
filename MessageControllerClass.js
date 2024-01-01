@@ -104,15 +104,15 @@ class MessageController {
     prayerPause() {
         clearTimeout(this.timeoutID);
         mainElement.classList.remove("fadeIn");
-        footerElement.classList.remove("fadeIn");
+        //footerElement.classList.remove("fadeIn");
         mainElement.classList.add("fadeOut");
-        footerElement.classList.add("fadeOut");
+        //footerElement.classList.add("fadeOut");
     }
     prayerUnpause() {
         mainElement.classList.remove("fadeOut");
-        footerElement.classList.remove("fadeOut");
+        //footerElement.classList.remove("fadeOut");
         mainElement.classList.add("fadeIn");
-        footerElement.classList.add("fadeIn");
+        //footerElement.classList.add("fadeIn");
     }
 
 
