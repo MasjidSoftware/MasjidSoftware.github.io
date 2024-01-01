@@ -84,11 +84,7 @@ function startTime() {
         minute: "numeric",
         second: "numeric",
     };
-    if (now.toLocaleDateString(arabicLocale, { weekday: "long" }) == "الجمعة") {
-        dhuhrNameElement.innerHTML = "الجمعة";
-    } else {
-        dhuhrNameElement.innerHTML = "الظهر";
-    }
+
     clockElment.innerHTML = now.toLocaleTimeString(arabicLocale, timeOptions);
     //h + ":" + m + ":" + s + " " + AMorPM;
     dateElement.innerHTML = now.toLocaleDateString(arabicLocale, dateOptions);
@@ -152,7 +148,12 @@ function updatePrayerTimes(now) {
         dhurTime.setHours(hoursMinutes[0]);
         dhurTime.setMinutes(hoursMinutes[1]);
         dhurTime.setSeconds(0);
-        dhuhrEvent = new PrayerEvent(dhurTime, "الظهر");
+        let prayerName = "الظهر";
+        let currentDate = new Date();
+        if (currentDate.toLocaleDateString(arabicLocale, { weekday: "long" }) == "الجمعة") {
+            prayerName = "الجمعة";
+        }
+        dhuhrEvent = new PrayerEvent(dhurTime, prayerName);
         dhuhrTimeElement.innerHTML = dhuhrEvent.getAthanTime();//getInArabicAMPM(dayPrayerTimes[2]);
 
 
@@ -268,9 +269,9 @@ function setProgress(percentage) {
     percentage = Math.ceil(percentage);
     percentage = (percentage > 100) ? 100 : percentage;
     percentage = (percentage < 0) ? 0 : percentage;
-    console.log(percentage);
+    //console.log(percentage);
     let percentageRemaining = 100 - percentage;
-    console.log(percentageRemaining);
+    //console.log(percentageRemaining);
     notificationsElement.style.background = "linear-gradient(-90deg, " + secondaryColor + " " + percentage + "%, " + messageBgColor + " " + percentage + "%)";
 }
 function prefixZero(n) {
