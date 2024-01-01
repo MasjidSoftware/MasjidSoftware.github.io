@@ -17,26 +17,26 @@
 :root {
   /*Page Setting*/
   --numbers-font: KSA;
-  --secondary: rgb(229, 175, 39);
+  --secondary: rgb(229, 171, 23); /*rgb(229, 175, 39);*/
   --primary: rgb(2, 36, 87);
   --primary-transparent: rgb(255, 255, 255);
 
-  --message-font-size: max(2.8vw, 3.5vh);
+  --message-font-size: max(3.2vw, 3.5vh);
   --message-font-color: black;
   --message-bg-color: var(--primary-transparent);
   --message-border-color: var(--secondary);
   --message-footnote-color: red;
-  --message-title-font-size: calc(var(--message-font-size) * 0.7);
+  --message-title-font-size: calc(var(--message-font-size) * 0.8);
 
   --prayer-time-font-size: calc(Var(--message-font-size) * 0.6);
   --prayer-time-font-color: black;
-  --prayer-name-font-size: calc(Var(--message-font-size) * 0.6);
-  --prayer-name-font-color: white;
+  --prayer-name-font-size: calc(Var(--message-font-size) * 0.8);
+  --prayer-name-font-color: var(--secondary);
 
-  --prayer-group-bg-color: var(--secondary);
-  --prayer-group-border-color: white;
+  --prayer-group-bg-color: white;
+  --prayer-group-border-color: var(--secondary);
 
-  --pattern-bg-color-1: var(--secondary);
+  --pattern-bg-color-1: var(--primary);
   --pattern-bg-color-2: var(--primary);
 
   --box-shadow-color: black;
@@ -112,7 +112,7 @@ body {
 }
 .prayer-group-container {
   background-color: var(--prayer-group-bg-color);
-  border: 1px solid var(--prayer-group-border-color);
+  border: 2px solid var(--prayer-group-border-color);
   border-radius: 6px;
   justify-content: center;
   display: flex;
@@ -211,7 +211,7 @@ body {
   color: var(--secondary);
   font-size: var(--message-title-font-size);
   margin-bottom: 10px;
-  border-bottom: 1px solid var(--secondary);
+  border-bottom: 2px solid var(--secondary);
   padding-right: 5px;
   padding-left: 5px;
 }
