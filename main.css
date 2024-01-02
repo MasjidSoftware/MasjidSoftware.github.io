@@ -37,6 +37,8 @@
   --prayer-group-bg-color: var(--primary);
   --prayer-group-border-color: var(--primary);
 
+  --notification-time-font-color: var(--primary);
+
   --pattern-bg-color-1: var(--primary);
   --pattern-bg-color-2: var(--primary);
 
@@ -128,7 +130,7 @@ body {
 }
 .notifications-container {
   background-color: var(--message-bg-color);
-  border: 1px solid var(--message-font-color);
+  border: 1px solid var(--message-bg-color);
   border-radius: 6px;
   text-align: center;
   justify-content: center;
@@ -144,8 +146,8 @@ body {
 .notification-timer {
   font-family: var(--numbers-font);
   font-size: var(--prayer-time-font-size);
-  color: var(--prayer-time-font-color);
-  border-bottom: 3px solid var(--prayer-time-font-color);
+  color: var(--notification-time-font-color);
+  border-bottom: 3px solid var(--notification-time-font-color);
   border-radius: 3px;
   padding: 0px 5px;
   min-width: calc(var(--prayer-time-font-size) * 3);
