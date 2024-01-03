@@ -2,7 +2,8 @@
 function EntoAr(s) {
     return s.replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
 }
-
+var messageTitleElement;
+var messageBodyElement;
 class Message {
     text;
     title;
@@ -35,16 +36,16 @@ class Message {
 
     }
     createElements(repeat) {
-        let titleStart = "<div class='messageTitleContainer'> <p class='messageTitle'>";
-        let titleEnd = "<span id='messageIndex'> </span></p></div> ";
-        let title = titleStart + this.title + titleEnd;
+        //let titleStart = "<div class='messageTitleContainer'> <div class='date' id='date'></div><p class='messageTitle'>";
+        //let titleEnd = "<span id='messageIndex'> </span></p> <div class='clock' id='clock'></div></div> ";
+        //let title = titleStart + this.title + titleEnd;
         let textStart = "<div class='messageText'>";
         let textEnd = "</div>";
         let text = textStart + this.text + textEnd;
         if (repeat != undefined)
-            return title + text + repeat + this.#getFootnoteElements();
+            return text + repeat + this.#getFootnoteElements();
         else
-            return title + text + this.#getFootnoteElements();
+            return text + this.#getFootnoteElements();
     }
     #getFootnoteElements() {
         let elements = "";

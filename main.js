@@ -1,10 +1,13 @@
 //-----Start of Settings-----
 var englishLocale = "en-SA";
 var arabicLocale = "ar-SA";
-
+var version = "برمجيات المسجد نسخة "
+version += "1.1";
 //-----End of Settings-------
+
 var mainElement;
 var messageElement;
+
 var footerElement;
 var clockElment;
 var dateElement;
@@ -40,8 +43,10 @@ var messageBgColor;
 function main() {
 
     setupGlobalElements();
-    setInterval(startTime, 1000);
-    messageController = new MessageController(afterPrayerMessages, morningEveningMessages);
+    initializeMessageArrays();
+    messageTitleElement.innerHTML = version;
+    setTimeout(() => { setInterval(startTime, 1000); messageController = new MessageController(afterPrayerMessages, morningEveningMessages); }, 5000);
+
 
 }
 function setupGlobalElements() {
@@ -53,10 +58,12 @@ function setupGlobalElements() {
 
     mainElement = document.getElementById("main");
     messageElement = document.getElementById("message");
+    messageBodyElement = document.getElementById("messageBody");
+    messageTitleElement = document.getElementById("messageTitle");
+
     footerElement = document.getElementById("footer");
 
-    clockElment = document.getElementById("clock");
-    dateElement = document.getElementById("date");
+
     dhuhrNameElement = document.getElementById("dhuhr");
     fajrTimeElement = document.getElementById("fajrTime");
     shroogTimeElement = document.getElementById("shroogTime");
@@ -70,6 +77,14 @@ function setupGlobalElements() {
     notificationElement = document.getElementById("notification");
     notificationTimerElement = document.getElementById("notificationTimer");
     messageIndexElement = document.getElementById("messageIndex");
+
+    clockElment = document.getElementById("clock");
+    dateElement = document.getElementById("date");;
+}
+function initializeMessageArrays() {
+    initializeAfterPrayerMessagesArray();
+    initializeAthanMessagesArray();
+    initializeMorningEveningMessagesArray();
 }
 function startTime() {
 
@@ -253,8 +268,9 @@ function hasSystemTimeChanged(now) {
             //console.log("Now: " + now)
             //console.log("Update Time Events - Time Diff " + (timeDifference / 1000));
         }
-        previousDateReading = now;
         isNewDay(now);
+        previousDateReading = now;
+
     }
 }
 function isNewDay(now) {

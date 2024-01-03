@@ -49,13 +49,13 @@ class MessageController {
 
         this.timeoutID = setTimeout(() => {
             clearTimeout(messageController.timeoutID);
-            messageElement.innerHTML = messageController.#currentMessages[messageController.#currentMessagesIndex].elements;
+            messageBodyElement.innerHTML = messageController.#currentMessages[messageController.#currentMessagesIndex].elements;
 
             mainElement.classList.remove("fadeOut");
             mainElement.classList.add("fadeIn");
             //---------------------------- CHECK
 
-            messageIndexElement = document.getElementById("messageIndex");
+            messageTitleElement.innerHTML = messageController.#currentMessages[messageController.#currentMessagesIndex].title;
 
             messageIndexElement.innerHTML = EntoAr((messageController.#currentMessagesIndex + 1) + " من " + (messageController.#currentMessages.length));
             //________________________________

@@ -25,13 +25,13 @@
   --message-bg-color: rgb(245, 245, 245);
   --message-border-color: var(--secondary);
   --message-footnote-color: red;
-  --message-title-font-size: calc(var(--message-font-size) * 0.8);
+  --message-title-font-size: calc(var(--message-font-size) * 0.7);
   --message-title-color: var(--message-font-color);
   --message-title-underline-color: var(--message-border-color);
 
-  --prayer-time-font-size: calc(Var(--message-font-size) * 0.6);
+  --prayer-time-font-size: calc(Var(--message-font-size) * 0.7);
   --prayer-time-font-color: var(--message-bg-color);
-  --prayer-name-font-size: calc(Var(--message-font-size) * 0.8);
+  --prayer-name-font-size: calc(Var(--message-font-size) * 0.7);
   --prayer-name-font-color: var(--secondary);
 
   --prayer-group-bg-color: var(--primary);
@@ -194,10 +194,24 @@ body {
   overflow: hidden;
 }
 .date {
+  text-align: start;
+  color: var(--message-title-underline-color);
   font-family: var(--numbers-font);
+  min-width: max(14vw, 14vh);
+  border-top: 2px solid var(--message-font-color);
+  border-right: 2px solid var(--message-font-color);
+  padding-right: 1vw;
+  font-size: var(--message-title-font-size);
 }
 .clock {
+  text-align: end;
+  color: var(--message-title-underline-color);
   font-family: var(--numbers-font);
+  min-width: max(14vw, 14vh);
+  border-top: 2px solid var(--message-font-color);
+  border-left: 2px solid var(--message-font-color);
+  padding-left: 1vw;
+  font-size: var(--message-title-font-size);
 }
 .dhikerCount {
   display: inline;
@@ -219,7 +233,10 @@ body {
   padding-left: 5px;
 }
 .messageTitleContainer {
-  text-align: center;
+  flex-grow: 1;
+  justify-content: space-between;
+  display: flex;
+  margin-bottom: 6px;
 }
 #messageIndex {
   margin-right: 10px;

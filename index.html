@@ -16,7 +16,18 @@
   </head>
   <body class="theme-pattern-1" onload="main()">
     <div class="main" id="main">
-      <div class="main-item message" id="message">بسم الله الرحمن الرحيم</div>
+      <div class="main-item message" id="message">
+        <div class="messageTitleContainer">
+          <span class="date" id="date"></span>
+          <p class="messageTitle">
+            <span id="messageTitle"></span>
+            <span id="messageIndex"></span>
+          </p>
+          <span class="clock" id="clock"></span>
+        </div>
+
+        <div class="messageText" id="messageBody">بسم الله الرحمن الرحيم</div>
+      </div>
     </div>
     <div class="footer" id="footer">
       <div id="prayers" class="prayer-group-container card">
@@ -55,10 +66,7 @@
       </div>
     </div>
     <div class="fullScreen">
-      <div class="fullScreenFexContainer">
-        <div class="date" id="date"></div>
-        <div class="clock" id="clock"></div>
-      </div>
+      <div class="fullScreenFexContainer"></div>
     </div>
   </body>
 </html>
