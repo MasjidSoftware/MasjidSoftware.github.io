@@ -28,7 +28,6 @@ class PrayerEvent {
             this.iqamaMinutesDelay = iqamaMinutesDelay;
             this.prayerMinutesDuration = prayerMinutesDuration;
         }
-
         this.afterPrayerAthkarMinutesDuration = afterPrayerAthkarMinutesDuration;
         this.eventName = eventName;
         this.updateTimes(entryDateTime);

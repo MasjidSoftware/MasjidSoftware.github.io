@@ -2,7 +2,7 @@
 var englishLocale = "en-SA";
 var arabicLocale = "ar-SA";
 var version = "برمجيات المسجد نسخة "
-version += "1.1";
+version += "1.1.1";
 //-----End of Settings-------
 
 var mainElement;
@@ -167,6 +167,7 @@ function updatePrayerTimes(now) {
         let currentDate = new Date();
         if (currentDate.toLocaleDateString(arabicLocale, { weekday: "long" }) == "الجمعة") {
             prayerName = "الجمعة";
+            dhuhrNameElement.innerHTML = "الجمعة";
         }
         dhuhrEvent = new PrayerEvent(dhurTime, prayerName);
         dhuhrTimeElement.innerHTML = dhuhrEvent.getAthanTime();//getInArabicAMPM(dayPrayerTimes[2]);
