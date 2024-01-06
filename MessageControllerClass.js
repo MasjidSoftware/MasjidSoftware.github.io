@@ -14,7 +14,7 @@ class MessageController {
         this.#afterPrayerMessages = afterPrayerMessages;
         this.#morningEveningMessages = morningEveningMessages;
         this.#athanMessages = athanMessages;
-        this.startMorningEveningMessages();
+        this.startDefaultMessages();
     }
     startAfterPrayerMessages() {
         if (this.#currentMessages === undefined || this.#currentMessages[0].type !== this.#afterPrayerMessages[0].type) {
@@ -41,6 +41,9 @@ class MessageController {
             this.#displayMessage();
         }
 
+    }
+    startDefaultMessages() {
+        this.startMorningEveningMessages();
     }
     #displayMessage() {
         mainElement.classList.remove("fadeIn");
