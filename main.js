@@ -1,8 +1,10 @@
+
 //-----Start of Settings-----
 var englishLocale = "en-SA";
 var arabicLocale = "ar-SA";
 var version = "برمجيات المسجد نسخة "
-version += "1.1.1";
+version += "1.1.2";
+var logging = false;
 //-----End of Settings-------
 
 var mainElement;
@@ -205,7 +207,7 @@ function updatePrayerTimes(now) {
 
         //Default messages
         if (!eshaEvent.isActive(now) && !maghribEvent.isActive(now) && !asrEvent.isActive(now) && !dhuhrEvent.isActive(now) && !fajrEvent.isActive(now))
-            messageController.startMorningEveningMessages();
+            messageController.startDefaultMessages();
     }
     if (missingDay) {
         //Missing day in timing table...
