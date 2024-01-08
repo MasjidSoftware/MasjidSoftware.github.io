@@ -1,5 +1,6 @@
 class PrayerEvent {
     athanTimeoutID;
+    afterAthanTimeoutID;
     prayerEndTimeoutID;
     prayerPauseTimeoutID;
     backToNormalTimeoutID;
@@ -19,7 +20,7 @@ class PrayerEvent {
     #countdownSeconds = 5 * 60;
 
 
-    constructor(entryDateTime, eventName, iqamaMinutesDelay = 20, prayerMinutesDuration = 10, afterPrayerAthkarMinutesDuration = 15) {
+    constructor(entryDateTime, eventName, iqamaMinutesDelay = 20, prayerMinutesDuration = 10, afterPrayerAthkarMinutesDuration = 10) {
         if (eventName == "الجمعة") {
             this.iqamaMinutesDelay = 0;//Second athan
             this.prayerMinutesDuration = 27; //Second Athan + Khutbah + Prayer
@@ -64,16 +65,19 @@ class PrayerEvent {
                 console.log(this.eventName + " athan notification " + notificationTime);
                 console.log(this.eventName + " athan " + this.athanTime);
             }
+            this.afterAthanTimeoutID = setTimeout(() => {
+                messageController.startArkanAlsalahMessages();
+            }, this.athanTime - now);
 
             this.athanNotificationTimeoutID = setTimeout((time, eventName) => {
                 messageController.displayNotification(time, eventName);
                 messageController.startAthanMessages();
             }, notificationTime - now, this.athanTime, "أذان " + this.eventName);
         } else if (now < this.iqamaTime) {
-            messageController.startAthanMessages();
+            messageController.startArkanAlsalahMessages();
         }
-
     }
+
     setIqamaTimeout() {
         clearTimeout(this.iqamaNotificationTimeoutID);
         clearTimeout(this.prayerPauseTimeoutID);

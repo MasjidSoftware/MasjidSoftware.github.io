@@ -275,6 +275,12 @@ sup {
 ol li::marker {
   color: var(--message-footnote-color);
 }
+.messageListItem::marker {
+  color: var(--message-font-color);
+}
+.messageListItem {
+  font-size: var(--message-font-size);
+}
 .braces {
   color: var(--secondary);
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;

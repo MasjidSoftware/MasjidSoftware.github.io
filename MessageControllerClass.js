@@ -3,17 +3,19 @@ class MessageController {
     #afterPrayerMessages;
     #morningEveningMessages;
     #athanMessages;
+    #arkanAlsalahMessages;
     #currentMessages;
     #currentMessagesIndex = 0;
     timeoutID;
     notificationTimeoutID;
     notificationEndTimeDate;
     notificationRegisteredTimeDate;
-    #delayPerCharacter = 70; //milliseconds
-    constructor(afterPrayerMessages = [], morningEveningMessages = []) {
+    #delayPerCharacter = 80; //milliseconds
+    constructor(afterPrayerMessages = [], morningEveningMessages = [], athanMessages = [], arkanAlsalahMessages = []) {
         this.#afterPrayerMessages = afterPrayerMessages;
         this.#morningEveningMessages = morningEveningMessages;
         this.#athanMessages = athanMessages;
+        this.#arkanAlsalahMessages = arkanAlsalahMessages;
         this.startDefaultMessages();
     }
     startAfterPrayerMessages() {
@@ -42,6 +44,14 @@ class MessageController {
         }
 
     }
+    startArkanAlsalahMessages() {
+        if (this.#currentMessages === undefined || this.#currentMessages[0].type !== this.#arkanAlsalahMessages[0].type) {
+            clearTimeout(this.timeoutID);
+            this.#currentMessages = this.#arkanAlsalahMessages;
+            this.#currentMessagesIndex = 0;
+            this.#displayMessage();
+        }
+    }
     startDefaultMessages() {
         this.startMorningEveningMessages();
     }
@@ -63,6 +73,7 @@ class MessageController {
             messageIndexElement.innerHTML = EntoAr((messageController.#currentMessagesIndex + 1) + " من " + (messageController.#currentMessages.length));
             //________________________________
             let delay = messageController.#currentMessages[messageController.#currentMessagesIndex].messageCharacters * messageController.#delayPerCharacter;
+            delay = Math.max(delay, 10000);
             messageController.#currentMessagesIndex++;
             if (messageController.#currentMessagesIndex > messageController.#currentMessages.length - 1)
                 messageController.#currentMessagesIndex = 0;

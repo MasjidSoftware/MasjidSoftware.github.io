@@ -160,3 +160,37 @@ class BasicMessage extends Message {
     }
 
 }
+class ListMessage extends Message {
+    messageList;
+    listStartingNum;
+    constructor(title = "بدون عنوان", text = "الدعاء", type, messageList = [], listStartingNum = 1, footnotes = [], footnotesTitle = "", basmallah = false, taooth = false) {
+        title = EntoAr(title)
+        super(title, text, footnotes, footnotesTitle, basmallah, taooth);
+        this.type = type;
+        this.messageList = messageList;
+        this.listStartingNum = listStartingNum;
+        this.#setMessageCharacters();
+        this.createElements();
+    }
+    createElements() {
+        this.elements = super.createElements(this.#getListElements());
+    }
+    #getListElements() {
+        let elements = "";
+        if (this.messageList.length > 0) {
+            let startTag = "<ol start=" + this.listStartingNum + ">";
+            let endTag = "</ol>";
+            let list = "";
+            for (let i = 0; i < this.messageList.length; i++) {
+                list += "<li class='messageListItem'>" + this.messageList[i] + "</li>";
+            }
+            elements = startTag + list + endTag;
+        }
+        return elements;
+    }
+    #setMessageCharacters() {
+        for (let i = 0; i < this.messageList.length; i++) {
+            this.messageCharacters += this.messageList[i].trim().length * 1.7;
+        }
+    }
+}

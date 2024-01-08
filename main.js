@@ -3,7 +3,7 @@
 var englishLocale = "en-SA";
 var arabicLocale = "ar-SA";
 var version = "برمجيات المسجد نسخة "
-version += "1.1.2";
+version += "1.1.3";
 var logging = false;
 //-----End of Settings-------
 
@@ -47,7 +47,7 @@ function main() {
     setupGlobalElements();
     initializeMessageArrays();
     messageTitleElement.innerHTML = version;
-    setTimeout(() => { setInterval(startTime, 1000); messageController = new MessageController(afterPrayerMessages, morningEveningMessages); }, 5000);
+    setTimeout(() => { setInterval(startTime, 1000); messageController = new MessageController(afterPrayerMessages, morningEveningMessages, athanMessages, arkanAlsalahMessages); }, 5000);
 
 
 }
@@ -87,6 +87,7 @@ function initializeMessageArrays() {
     initializeAfterPrayerMessagesArray();
     initializeAthanMessagesArray();
     initializeMorningEveningMessagesArray();
+    initializeArkanAlsalahMessagesArray();
 }
 function startTime() {
 
