@@ -56,7 +56,7 @@ function setupGlobalElements() {
     //get default CSS colors
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundPosition = "center";
-    document.body.style.backgroundSize = "max(20vw,20vh)";
+    document.body.style.backgroundSize = "max(10vw,10vh)";
 
     var bodyStyles = window.getComputedStyle(document.body);
     primaryColor = bodyStyles.getPropertyValue('--primary');
