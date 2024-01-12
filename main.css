@@ -93,16 +93,32 @@ body {
 .theme-pattern-1 {
   /*PATTERN*/
 
-  --_g: #0000 83%, var(--pattern-bg-color-1) 85% 99%, #0000 101%;
-  background: radial-gradient(27% 29% at right, var(--_g))
-      calc(var(--pattern-size) / 2) var(--pattern-size),
-    radial-gradient(27% 29% at left, var(--_g)) calc(var(--pattern-size) / -2)
-      var(--pattern-size),
-    radial-gradient(29% 27% at top, var(--_g)) 0 calc(var(--pattern-size) / 2),
-    radial-gradient(29% 27% at bottom, var(--_g)) 0
-      calc(var(--pattern-size) / -2) var(--pattern-bg-color-2);
-  background-size: calc(2 * var(--pattern-size)) calc(2 * var(--pattern-size));
+  background: radial-gradient(black 3px, transparent 4px),
+    radial-gradient(black 3px, transparent 4px),
+    linear-gradient(#fff 4px, transparent 0),
+    linear-gradient(
+      45deg,
+      transparent 74px,
+      transparent 75px,
+      #a4a4a4 75px,
+      #a4a4a4 76px,
+      transparent 77px,
+      transparent 109px
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 75px,
+      transparent 76px,
+      #a4a4a4 76px,
+      #a4a4a4 77px,
+      transparent 78px,
+      transparent 109px
+    ),
+    #fff;
+  background-size: 109px 109px, 109px 109px, 100% 6px, 109px 109px, 109px 109px;
+  background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
 }
+
 .main {
   padding: 5px 40px;
   display: flex;
