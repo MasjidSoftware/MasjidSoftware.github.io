@@ -40,6 +40,7 @@ var messageIndexElement;
 var primaryColor;
 var secondaryColor;
 var messageBgColor;
+var resolutionElement;
 
 
 
@@ -86,7 +87,9 @@ function setupGlobalElements() {
     messageIndexElement = document.getElementById("messageIndex");
 
     clockElment = document.getElementById("clock");
-    dateElement = document.getElementById("date");;
+    dateElement = document.getElementById("date");
+
+    resolutionElement = document.getElementById("resolution");
 }
 function initializeMessageArrays() {
     initializeAfterPrayerMessagesArray();
@@ -95,6 +98,7 @@ function initializeMessageArrays() {
     initializeArkanAlsalahMessagesArray();
     initializeWajibatAlsalahMessagesArray();
     initializeMubtilatAlsalahMessagesArray();
+    resolutionElement.innerHTML = "عرض" + EntoAr(String(document.body.offsetWidth)) + "<br>" + "طول" + EntoAr(String(document.body.offsetHeight));
 }
 function startTime() {
 
@@ -303,7 +307,7 @@ function setProgress(percentage) {
     //console.log(percentage);
     let percentageRemaining = 100 - percentage;
     //console.log(percentageRemaining);
-    notificationsElement.style.background = "linear-gradient(-90deg, " + secondaryColor + " " + percentage + "%, " + messageBgColor + " " + percentage + "%)";
+    notificationsElement.style.background = "linear-gradient(-90deg, " + secondaryColor + " " + percentage + "%, " + primaryColor + " " + percentage + "%)";
 }
 function prefixZero(n) {
     return n < 10 ? '0' + n : '' + n;
