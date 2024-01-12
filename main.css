@@ -20,7 +20,7 @@
   --secondary: rgb(229, 175, 39); /*rgb(229, 175, 39);*/
   --primary: black;
 
-  --message-font-size: max(3.3vw, 3.3vh);
+  --message-font-size: max(3.5vw, 3.5vh);
   --message-font-color: black;
   --message-bg-color: white;
   --message-border-color: var(--secondary);
@@ -181,7 +181,7 @@ body {
   font-size: var(--prayer-name-font-size);
   color: var(--prayer-name-font-color);
   display: inline-flex;
-  min-width: max(5.5vw, 5.5vh);
+  min-width: max(5vw, 5vh);
   justify-content: center;
 }
 .prayer-time {
@@ -193,7 +193,7 @@ body {
   border-radius: 3px;
   padding: 0px 5px;
   display: inline-flex;
-  min-width: max(9vw, 9vh);
+  min-width: max(8vw, 8vh);
   justify-content: center;
 }
 .prayer {
