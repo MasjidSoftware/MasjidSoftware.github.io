@@ -3,8 +3,9 @@
 var englishLocale = "en-SA";
 var arabicLocale = "ar-SA";
 var version = "برمجيات المسجد نسخة "
-version += "1.1.3";
+version += "1.1.4";
 var logging = false;
+var testDate = undefined;//new Date(2024, 0, 12, 12, 26, 55);
 //-----End of Settings-------
 
 var mainElement;
@@ -47,12 +48,16 @@ function main() {
     setupGlobalElements();
     initializeMessageArrays();
     messageTitleElement.innerHTML = version;
-    setTimeout(() => { setInterval(startTime, 1000); messageController = new MessageController(afterPrayerMessages, morningEveningMessages, athanMessages, arkanAlsalahMessages); }, 5000);
+    setTimeout(() => { setInterval(startTime, 1000); messageController = new MessageController(afterPrayerMessages, morningEveningMessages, athanMessages, arkanAlsalahMessages, wajibatAlsalahMessages, mubtilatAlsalahMessages); }, 5000);
 
 
 }
 function setupGlobalElements() {
     //get default CSS colors
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundSize = "max(20vw,20vh)";
+
     var bodyStyles = window.getComputedStyle(document.body);
     primaryColor = bodyStyles.getPropertyValue('--primary');
     secondaryColor = bodyStyles.getPropertyValue('--secondary');
@@ -88,10 +93,16 @@ function initializeMessageArrays() {
     initializeAthanMessagesArray();
     initializeMorningEveningMessagesArray();
     initializeArkanAlsalahMessagesArray();
+    initializeWajibatAlsalahMessagesArray();
+    initializeMubtilatAlsalahMessagesArray();
 }
 function startTime() {
 
-    const now = new Date();
+    let now = new Date();
+    if (testDate != undefined) {
+        testDate.setSeconds(testDate.getSeconds() + 1);
+        now = new Date(testDate.getTime());
+    }
     const dateOptions = {
         year: "numeric",
         month: "numeric",

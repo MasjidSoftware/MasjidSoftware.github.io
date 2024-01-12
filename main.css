@@ -18,31 +18,31 @@
   /*Page Setting*/
   --numbers-font: KSA;
   --secondary: rgb(229, 175, 39); /*rgb(229, 175, 39);*/
-  --primary: rgb(0, 0, 0);
+  --primary: black;
 
-  --message-font-size: max(3.5vw, 3.5vh);
+  --message-font-size: max(3.3vw, 3.3vh);
   --message-font-color: black;
-  --message-bg-color: rgb(245, 245, 245);
+  --message-bg-color: white;
   --message-border-color: var(--secondary);
   --message-footnote-color: red;
   --message-title-font-size: calc(var(--message-font-size) * 0.7);
   --message-title-color: var(--message-font-color);
   --message-title-underline-color: var(--message-border-color);
 
-  --prayer-time-font-size: calc(Var(--message-font-size) * 0.7);
+  --prayer-time-font-size: calc(Var(--message-font-size) * 0.65);
   --prayer-time-font-color: var(--message-bg-color);
-  --prayer-name-font-size: calc(Var(--message-font-size) * 0.7);
+  --prayer-name-font-size: calc(Var(--message-font-size) * 0.65);
   --prayer-name-font-color: var(--secondary);
 
   --prayer-group-bg-color: var(--primary);
   --prayer-group-border-color: var(--primary);
 
-  --notification-time-font-color: var(--primary);
+  --notification-time-font-color: var(--message-font-color);
 
   --pattern-bg-color-1: var(--primary);
   --pattern-bg-color-2: var(--primary);
 
-  --box-shadow-color: rgb(152, 152, 152);
+  --box-shadow-color: rgb(0, 0, 0);
 
   --pattern-size: max(3vw, 3vh);
 }
@@ -54,8 +54,11 @@
 }
 .card {
   /* Add shadows to create the "card" effect */
-  box-shadow: 1px 1px 1px 1px var(--box-shadow-color);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   transition-duration: 0s;
+}
+.card2 {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
 }
 html {
   background-color: var(--pattern-bg-color-2);
@@ -130,7 +133,7 @@ body {
 }
 .notifications-container {
   background-color: var(--message-bg-color);
-  border: 1px solid var(--message-bg-color);
+  border: 1px solid var(--message-font-color);
   border-radius: 6px;
   text-align: center;
   justify-content: center;
@@ -159,21 +162,24 @@ body {
 .prayer-name {
   font-size: var(--prayer-name-font-size);
   color: var(--prayer-name-font-color);
+  display: inline-flex;
+  min-width: max(5.8vw, 5.8vh);
+  justify-content: center;
 }
 .prayer-time {
   font-family: var(--numbers-font);
   font-size: var(--prayer-time-font-size);
   color: var(--prayer-time-font-color);
   letter-spacing: 0.15em;
-  border-bottom: 2px solid var(--prayer-time-font-color);
+  border-bottom: 3px solid var(--prayer-time-font-color);
   border-radius: 3px;
   padding: 0px 5px;
   display: inline-flex;
-  min-width: max(9.5vw, 9.5vh);
+  min-width: max(9.3vw, 9.3vh);
   justify-content: center;
 }
 .prayer {
-  text-align: center;
+  text-align: right;
   min-width: 55px;
   margin: 8px;
   display: inline;
@@ -201,9 +207,8 @@ body {
   color: var(--message-title-underline-color);
   font-family: var(--numbers-font);
   min-width: max(14vw, 14vh);
-  border-top: 2px solid var(--message-font-color);
-  border-right: 2px solid var(--message-font-color);
   padding-right: 1vw;
+  border-radius: 5px;
   font-size: var(--message-title-font-size);
 }
 .clock {
@@ -211,8 +216,6 @@ body {
   color: var(--message-title-underline-color);
   font-family: var(--numbers-font);
   min-width: max(14vw, 14vh);
-  border-top: 2px solid var(--message-font-color);
-  border-left: 2px solid var(--message-font-color);
   padding-left: 1vw;
   font-size: var(--message-title-font-size);
 }
@@ -276,10 +279,13 @@ ol li::marker {
   color: var(--message-footnote-color);
 }
 .messageListItem::marker {
-  color: var(--message-font-color);
+  color: var(--secondary);
 }
 .messageListItem {
   font-size: var(--message-font-size);
+}
+.messageOL {
+  padding-right: max(3vw, 3vh);
 }
 .braces {
   color: var(--secondary);
@@ -289,6 +295,7 @@ ol li::marker {
   padding-bottom: 0.2em;
   margin: 0px 0px;
   text-align: center;
+  font-size: calc(var(--message-font-size) * 0.6);
 }
 @media screen and (max-width: 700px) {
   .clock {

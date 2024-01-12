@@ -178,7 +178,7 @@ class ListMessage extends Message {
     #getListElements() {
         let elements = "";
         if (this.messageList.length > 0) {
-            let startTag = "<ol start=" + this.listStartingNum + ">";
+            let startTag = "<ol class='messageOL' start=" + this.listStartingNum + ">";
             let endTag = "</ol>";
             let list = "";
             for (let i = 0; i < this.messageList.length; i++) {

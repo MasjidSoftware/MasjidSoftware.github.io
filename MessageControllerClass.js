@@ -1,89 +1,123 @@
 class MessageController {
     //Arrays of different Messages
-    #afterPrayerMessages;
-    #morningEveningMessages;
-    #athanMessages;
-    #arkanAlsalahMessages;
-    #currentMessages;
-    #currentMessagesIndex = 0;
+    afterPrayerMessages;
+    morningEveningMessages;
+    athanMessages;
+    arkanAlsalahMessages;
+    wajibatAlsalahMessages;
+    mubtilatAlsalahMessages;
+    currentMessages;
+    currentMessagesIndex = 0;
     timeoutID;
     notificationTimeoutID;
     notificationEndTimeDate;
     notificationRegisteredTimeDate;
-    #delayPerCharacter = 80; //milliseconds
-    constructor(afterPrayerMessages = [], morningEveningMessages = [], athanMessages = [], arkanAlsalahMessages = []) {
-        this.#afterPrayerMessages = afterPrayerMessages;
-        this.#morningEveningMessages = morningEveningMessages;
-        this.#athanMessages = athanMessages;
-        this.#arkanAlsalahMessages = arkanAlsalahMessages;
-        this.startDefaultMessages();
+    delayPerCharacter = 80; //milliseconds
+    constructor(afterPrayerMessages = [], morningEveningMessages = [], athanMessages = [], arkanAlsalahMessages = [], wajibatAlsalahMessages = [], mubtilatAlsalahMessages = []) {
+        this.afterPrayerMessages = afterPrayerMessages;
+        this.morningEveningMessages = morningEveningMessages;
+        this.athanMessages = athanMessages;
+        this.arkanAlsalahMessages = arkanAlsalahMessages;
+        this.wajibatAlsalahMessages = wajibatAlsalahMessages;
+        this.mubtilatAlsalahMessages = mubtilatAlsalahMessages;
     }
     startAfterPrayerMessages() {
-        if (this.#currentMessages === undefined || this.#currentMessages[0].type !== this.#afterPrayerMessages[0].type) {
-            clearTimeout(this.timeoutID);
-            this.#currentMessages = this.#afterPrayerMessages;
-            this.#currentMessagesIndex = 0;
-            this.#displayMessage();
+        if (messageController.currentMessages === undefined || messageController.currentMessages[0].type !== messageController.afterPrayerMessages[0].type) {
+            clearTimeout(messageController.timeoutID);
+            messageController.currentMessages = messageController.afterPrayerMessages;
+            messageController.currentMessagesIndex = 0;
+            messageController.displayMessage();
         }
     }
     startMorningEveningMessages() {
-        if (this.#currentMessages === undefined || this.#currentMessages[0].type !== this.#morningEveningMessages[0].type) {
-            clearTimeout(this.timeoutID);
-            this.#currentMessages = this.#morningEveningMessages;
-            this.#currentMessagesIndex = 0;
-            this.#displayMessage();
+        if (messageController.currentMessages === undefined || messageController.currentMessages[0].type !== messageController.morningEveningMessages[0].type) {
+            clearTimeout(messageController.timeoutID);
+            messageController.currentMessages = messageController.morningEveningMessages;
+            messageController.currentMessagesIndex = 0;
+            messageController.displayMessage();
         }
 
     }
     startAthanMessages() {
-        if (this.#currentMessages === undefined || this.#currentMessages[0].type !== this.#athanMessages[0].type) {
-            clearTimeout(this.timeoutID);
-            this.#currentMessages = this.#athanMessages;
-            this.#currentMessagesIndex = 0;
-            this.#displayMessage();
+        if (messageController.currentMessages === undefined || messageController.currentMessages[0].type !== messageController.athanMessages[0].type) {
+            clearTimeout(messageController.timeoutID);
+            messageController.currentMessages = messageController.athanMessages;
+            messageController.currentMessagesIndex = 0;
+            messageController.displayMessage();
         }
-
     }
     startArkanAlsalahMessages() {
-        if (this.#currentMessages === undefined || this.#currentMessages[0].type !== this.#arkanAlsalahMessages[0].type) {
-            clearTimeout(this.timeoutID);
-            this.#currentMessages = this.#arkanAlsalahMessages;
-            this.#currentMessagesIndex = 0;
-            this.#displayMessage();
+        if (messageController.currentMessages === undefined || messageController.currentMessages[0].type !== messageController.arkanAlsalahMessages[0].type) {
+            clearTimeout(messageController.timeoutID);
+            messageController.currentMessages = messageController.arkanAlsalahMessages;
+            messageController.currentMessagesIndex = 0;
+            messageController.displayMessage();
+        }
+    }
+    startWajibatAlsalahMessages() {
+        if (messageController.currentMessages === undefined || messageController.currentMessages[0].type !== messageController.wajibatAlsalahMessages[0].type) {
+            clearTimeout(messageController.timeoutID);
+            messageController.currentMessages = messageController.wajibatAlsalahMessages;
+            messageController.currentMessagesIndex = 0;
+            messageController.displayMessage();
+        }
+    }
+    startMubtilatAlsalahMessages() {
+        if (messageController.currentMessages === undefined || messageController.currentMessages[0].type !== messageController.mubtilatAlsalahMessages[0].type) {
+            clearTimeout(messageController.timeoutID);
+            messageController.currentMessages = messageController.mubtilatAlsalahMessages;
+            messageController.currentMessagesIndex = 0;
+            messageController.displayMessage();
         }
     }
     startDefaultMessages() {
-        this.startMorningEveningMessages();
+        messageController.startMorningEveningMessages();
     }
-    #displayMessage() {
+    displayMessage() {
         mainElement.classList.remove("fadeIn");
         mainElement.classList.add("fadeOut");
         //wait for fadout
 
-        this.timeoutID = setTimeout(() => {
+        messageController.timeoutID = setTimeout(() => {
             clearTimeout(messageController.timeoutID);
-            messageBodyElement.innerHTML = messageController.#currentMessages[messageController.#currentMessagesIndex].elements;
+            messageBodyElement.innerHTML = messageController.currentMessages[messageController.currentMessagesIndex].elements;
 
             mainElement.classList.remove("fadeOut");
             mainElement.classList.add("fadeIn");
             //---------------------------- CHECK
 
-            messageTitleElement.innerHTML = messageController.#currentMessages[messageController.#currentMessagesIndex].title;
+            messageTitleElement.innerHTML = messageController.currentMessages[messageController.currentMessagesIndex].title;
 
-            messageIndexElement.innerHTML = EntoAr((messageController.#currentMessagesIndex + 1) + " من " + (messageController.#currentMessages.length));
+            messageIndexElement.innerHTML = EntoAr((messageController.currentMessagesIndex + 1) + " من " + (messageController.currentMessages.length));
             //________________________________
-            let delay = messageController.#currentMessages[messageController.#currentMessagesIndex].messageCharacters * messageController.#delayPerCharacter;
-            delay = Math.max(delay, 10000);
-            messageController.#currentMessagesIndex++;
-            if (messageController.#currentMessagesIndex > messageController.#currentMessages.length - 1)
-                messageController.#currentMessagesIndex = 0;
-            messageController.timeoutID = setTimeout(messageController.#displayMessage, delay);
+
+            messageController.nextMessage();
         }, 1500);
+    }
+    nextMessage() {
+        let delay = messageController.currentMessages[messageController.currentMessagesIndex].messageCharacters * messageController.delayPerCharacter;
+        delay = Math.max(delay, 10000);
+        messageController.currentMessagesIndex++;
+        if (messageController.currentMessagesIndex > messageController.currentMessages.length - 1) {
+            if (messageController.currentMessages[0].type === messageController.arkanAlsalahMessages[0].type)
+                messageController.timeoutID = setTimeout(messageController.startWajibatAlsalahMessages, delay);
+            else if (messageController.currentMessages[0].type === messageController.wajibatAlsalahMessages[0].type)
+                messageController.timeoutID = setTimeout(messageController.startMubtilatAlsalahMessages, delay);
+            else if (messageController.currentMessages[0].type === messageController.mubtilatAlsalahMessages[0].type)
+                messageController.timeoutID = setTimeout(messageController.startArkanAlsalahMessages, delay);
+            else {
+                messageController.currentMessagesIndex = 0;
+                messageController.timeoutID = setTimeout(messageController.displayMessage, delay);
+            }
+        }
+        else {
+            messageController.timeoutID = setTimeout(messageController.displayMessage, delay);
+        }
     }
     displayNotification(endDateTime, text = "NO TEXT") {
         clearInterval(messageController.notificationTimeoutID);
         messageController.notificationEndTimeDate = endDateTime;
-        messageController.notificationRegisteredTimeDate = new Date();
+        messageController.notificationRegisteredTimeDate = testDate == undefined ? new Date() : testDate;
         notificationElement.innerHTML = text;
         notificationsElement.style.display = "flex";
         prayersElement.style.display = "none";
@@ -91,7 +125,9 @@ class MessageController {
 
             // Get today's date and time
             let now = new Date().getTime();
-
+            if (testDate != undefined) {
+                now = new Date(testDate.getTime());
+            }
             // Find the distance between now and the count down date
             let distance = messageController.notificationEndTimeDate - now;
             let totalDistance = messageController.notificationEndTimeDate - messageController.notificationRegisteredTimeDate;
@@ -116,14 +152,16 @@ class MessageController {
         }, 1000);
     }
     prayerPause() {
-        clearTimeout(this.timeoutID);
+        clearTimeout(messageController.timeoutID);
         mainElement.classList.remove("fadeIn");
+        document.body.style.backgroundImage = "url('qr-code.png')"
         //footerElement.classList.remove("fadeIn");
         mainElement.classList.add("fadeOut");
         //footerElement.classList.add("fadeOut");
     }
     prayerUnpause() {
         mainElement.classList.remove("fadeOut");
+        document.body.style.backgroundImage = ""
         //footerElement.classList.remove("fadeOut");
         mainElement.classList.add("fadeIn");
         //footerElement.classList.add("fadeIn");

@@ -55,7 +55,11 @@ class PrayerEvent {
     setAthanTimeout() {
         clearTimeout(this.athanTimeoutID);
         clearTimeout(this.athanNotificationTimeoutID);
+        clearTimeout(this.afterAthanTimeoutID);
         let now = new Date();
+        if (testDate != undefined) {
+            now = new Date(testDate.getTime());
+        }
         let notificationTime = new Date(this.athanTime.getTime());
 
         if (now < this.athanTime) {
@@ -83,6 +87,9 @@ class PrayerEvent {
         clearTimeout(this.prayerPauseTimeoutID);
 
         let now = new Date();
+        if (testDate != undefined) {
+            now = new Date(testDate.getTime());
+        }
         let notificationTime = new Date(this.iqamaTime.getTime());
         notificationTime.setSeconds(notificationTime.getSeconds() - Math.min(this.#countdownSeconds, ((this.iqamaTime - now) / 1000)));
 
@@ -109,6 +116,9 @@ class PrayerEvent {
     setPrayerEndTimeout() {
         clearTimeout(this.prayerEndTimeoutID);
         let now = new Date();
+        if (testDate != undefined) {
+            now = new Date(testDate.getTime());
+        }
 
         if (now < this.prayerEndTime) {
 
@@ -118,7 +128,7 @@ class PrayerEvent {
             this.prayerEndTimeoutID = setTimeout(() => {
                 messageController.prayerUnpause();
                 messageController.startAfterPrayerMessages();
-            }, this.prayerEndTime - new Date());
+            }, this.prayerEndTime - now);
         } else if (now < this.afterPrayerAthkarEndTime) {
             messageController.prayerUnpause();
             messageController.startAfterPrayerMessages();
@@ -136,7 +146,7 @@ class PrayerEvent {
 
             this.backToNormalTimeoutID = setTimeout(() => {
                 messageController.startDefaultMessages();
-            }, this.afterPrayerAthkarEndTime - new Date());
+            }, this.afterPrayerAthkarEndTime - now);
         }
 
     }
