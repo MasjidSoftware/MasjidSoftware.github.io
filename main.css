@@ -92,16 +92,18 @@ body {
 
 .theme-pattern-1 {
   /*PATTERN*/
-
-  background: radial-gradient(black 3px, transparent 4px),
-    radial-gradient(black 3px, transparent 4px),
-    linear-gradient(#fff 4px, transparent 0),
+  --a: #fff;
+  --b: black;
+  --c: #a4a4a4;
+  background: radial-gradient(var(--a) 3px, transparent 4px),
+    radial-gradient(var(--a) 3px, transparent 4px),
+    linear-gradient(var(--b) 4px, transparent 0),
     linear-gradient(
       45deg,
       transparent 74px,
       transparent 75px,
-      #a4a4a4 75px,
-      #a4a4a4 76px,
+      var(--c) 75px,
+      var(--c) 76px,
       transparent 77px,
       transparent 109px
     ),
@@ -109,12 +111,12 @@ body {
       -45deg,
       transparent 75px,
       transparent 76px,
-      #a4a4a4 76px,
-      #a4a4a4 77px,
+      var(--c) 76px,
+      var(--c) 77px,
       transparent 78px,
       transparent 109px
     ),
-    #fff;
+    var(--b);
   background-size: 109px 109px, 109px 109px, 100% 6px, 109px 109px, 109px 109px;
   background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
 }
@@ -179,7 +181,7 @@ body {
   font-size: var(--prayer-name-font-size);
   color: var(--prayer-name-font-color);
   display: inline-flex;
-  min-width: max(5.8vw, 5.8vh);
+  min-width: max(5.5vw, 5.5vh);
   justify-content: center;
 }
 .prayer-time {
@@ -191,7 +193,7 @@ body {
   border-radius: 3px;
   padding: 0px 5px;
   display: inline-flex;
-  min-width: max(9.3vw, 9.3vh);
+  min-width: max(9vw, 9vh);
   justify-content: center;
 }
 .prayer {
