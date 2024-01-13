@@ -307,7 +307,7 @@ function setProgress(percentage) {
     //console.log(percentage);
     let percentageRemaining = 100 - percentage;
     //console.log(percentageRemaining);
-    notificationsElement.style.background = "linear-gradient(-90deg, " + secondaryColor + " " + percentage + "%, " + primaryColor + " " + percentage + "%)";
+    notificationsElement.style.background = "linear-gradient(-90deg, rgb(94, 94, 130) " + percentage + "%, rgb(2, 2, 43) " + percentage + "%)";
 }
 function prefixZero(n) {
     return n < 10 ? '0' + n : '' + n;
