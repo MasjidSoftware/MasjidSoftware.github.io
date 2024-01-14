@@ -3,7 +3,7 @@
 var englishLocale = "en-SA";
 var arabicLocale = "ar-SA";
 var version = "برمجيات المسجد نسخة "
-version += "1.1.7";
+version += "1.1.8";
 var logging = false;
 var testDate = undefined;//new Date(2024, 0, 12, 12, 26, 55);
 //-----End of Settings-------
