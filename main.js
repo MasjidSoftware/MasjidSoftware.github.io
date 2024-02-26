@@ -2,10 +2,10 @@
 //-----Start of Settings-----
 var englishLocale = "en-SA";
 var arabicLocale = "ar-SA";
-var version = "برمجيات المسجد نسخة "
-version += "1.1.8";
+var version = "برمجيات المسجد نسخة ";
+version += "1.2";
 var logging = false;
-var testDate = undefined;//new Date(2024, 0, 12, 12, 26, 55);
+var testDate = new Date(2024, 1, 26, 5, 19, 40);//Y,M(starts at 0),D
 //-----End of Settings-------
 
 var mainElement;
@@ -21,6 +21,14 @@ var dhuhrTimeElement;
 var asrTimeElement;
 var magribTimeElement;
 var eshaTimeElement;
+
+var fajrIqamaElement;
+var shroogIqamaElement;
+var dhuhrIqamaElement;
+var asrIqamaElement;
+var magribIqamaElement;
+var eshaIqamaElement;
+
 var fullScreenElement;
 var currentMessageID = 0;
 var messageController;
@@ -41,6 +49,7 @@ var primaryColor;
 var secondaryColor;
 var messageBgColor;
 var resolutionElement;
+var menuElement;
 
 
 
@@ -79,6 +88,14 @@ function setupGlobalElements() {
     asrTimeElement = document.getElementById("asrTime");
     magribTimeElement = document.getElementById("magribTime");
     eshaTimeElement = document.getElementById("eshaTime");
+
+    fajrIqamaElement = document.getElementById("fajrIqama");
+    shroogIqamaElement = document.getElementById("shrooqIqama");
+    dhuhrIqamaElement = document.getElementById("dhuhrIqama");
+    asrIqamaElement = document.getElementById("asrIqama");
+    magribIqamaElement = document.getElementById("magribIqama");
+    eshaIqamaElement = document.getElementById("eshaIqama");
+
     fullScreenElement = document.getElementById("fullScreen");
     prayersElement = document.getElementById("prayers");
     notificationsElement = document.getElementById("notifications");
@@ -88,6 +105,9 @@ function setupGlobalElements() {
 
     clockElment = document.getElementById("clock");
     dateElement = document.getElementById("date");
+
+    menuElement = document.getElementById("menu");
+
 
     resolutionElement = document.getElementById("resolution");
 }
@@ -163,6 +183,7 @@ function updatePrayerTimes(now) {
         fajrTime.setSeconds(0);
         fajrEvent = new PrayerEvent(fajrTime, "الفجر", 25);
         fajrTimeElement.innerHTML = fajrEvent.getAthanTime();//getInArabicAMPM(dayPrayerTimes[0]);
+        fajrIqamaElement.innerHTML = fajrEvent.getIqamaTime();//getInArabicAMPM(dayPrayerTimes[0]);
 
 
         //Manage shrooq
@@ -173,6 +194,7 @@ function updatePrayerTimes(now) {
         shrooqTime.setSeconds(0);
         shrooqEvent = new PrayerEvent(shrooqTime, "الشروق", 0);
         shroogTimeElement.innerHTML = shrooqEvent.getAthanTime(); //getInArabicAMPM(dayPrayerTimes[1]);
+        shroogIqamaElement.innerHTML = shrooqEvent.getAthanTime(); //getInArabicAMPM(dayPrayerTimes[1]);
 
 
         //Manage dhuhr
@@ -189,6 +211,7 @@ function updatePrayerTimes(now) {
         }
         dhuhrEvent = new PrayerEvent(dhurTime, prayerName);
         dhuhrTimeElement.innerHTML = dhuhrEvent.getAthanTime();//getInArabicAMPM(dayPrayerTimes[2]);
+        dhuhrIqamaElement.innerHTML = dhuhrEvent.getIqamaTime();//getInArabicAMPM(dayPrayerTimes[2]);
 
 
         //Manage asr
@@ -199,6 +222,7 @@ function updatePrayerTimes(now) {
         asrTime.setSeconds(0);
         asrEvent = new PrayerEvent(asrTime, "العصر");
         asrTimeElement.innerHTML = asrEvent.getAthanTime();//getInArabicAMPM(dayPrayerTimes[3]);
+        asrIqamaElement.innerHTML = asrEvent.getIqamaTime();//getInArabicAMPM(dayPrayerTimes[3]);
 
 
         //Manage maghrib
@@ -209,6 +233,7 @@ function updatePrayerTimes(now) {
         maghribTime.setSeconds(0);
         maghribEvent = new PrayerEvent(maghribTime, "المغرب", 10);
         magribTimeElement.innerHTML = maghribEvent.getAthanTime();//getInArabicAMPM(dayPrayerTimes[4]);
+        magribIqamaElement.innerHTML = maghribEvent.getIqamaTime();//getInArabicAMPM(dayPrayerTimes[4]);
 
 
         //Manage esha
@@ -219,7 +244,7 @@ function updatePrayerTimes(now) {
         eshaTime.setSeconds(0);
         eshaEvent = new PrayerEvent(eshaTime, "العشاء");
         eshaTimeElement.innerHTML = eshaEvent.getAthanTime();//getInArabicAMPM(dayPrayerTimes[5]);
-
+        eshaIqamaElement.innerHTML = eshaEvent.getIqamaTime();//getInArabicAMPM(dayPrayerTimes[5]);
 
         //Default messages
         if (!eshaEvent.isActive(now) && !maghribEvent.isActive(now) && !asrEvent.isActive(now) && !dhuhrEvent.isActive(now) && !fajrEvent.isActive(now))
@@ -300,6 +325,7 @@ function isNewDay(now) {
 
     }
 }
+
 function setProgress(percentage) {
     percentage = Math.ceil(percentage);
     percentage = (percentage > 100) ? 100 : percentage;
@@ -312,7 +338,31 @@ function setProgress(percentage) {
 function prefixZero(n) {
     return n < 10 ? '0' + n : '' + n;
 }
+function hideMenu() {
+    menuElement.style.display = "none";
+}
+function showMenu() {
+    menuElement.style.display = "";
 
+}
+
+function changeMenuSectionSize(element) {
+    element.parentElement.classList.toggle("active");
+    if (element.parentElement.classList.contains("active"))
+        element.firstElementChild.innerHTML = "-";
+    else
+        element.firstElementChild.innerHTML = "+";
+
+    let content = element.nextElementSibling;
+    if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+    } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+    }
+}
+function rotate(element) {
+    document.body.className = element.getAttribute("value");
+}
 
 
 
