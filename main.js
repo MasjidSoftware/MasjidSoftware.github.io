@@ -5,11 +5,12 @@ var arabicLocale = "ar-SA";
 var version = "برمجيات المسجد نسخة ";
 version += "1.2";
 var logging = false;
-var testDate = new Date(2024, 1, 26, 5, 19, 40);//Y,M(starts at 0),D
+var testDate = undefined//new Date(2024, 1, 26, 18, 20, 50);//Y,M(starts at 0),D
 //-----End of Settings-------
 
 var mainElement;
 var messageElement;
+var messageTitleContainerElement;
 
 var footerElement;
 var clockElment;
@@ -58,7 +59,7 @@ function main() {
     setupGlobalElements();
     initializeMessageArrays();
     messageTitleElement.innerHTML = version;
-    setTimeout(() => { setInterval(startTime, 1000); messageController = new MessageController(afterPrayerMessages, morningEveningMessages, athanMessages, arkanAlsalahMessages, wajibatAlsalahMessages, mubtilatAlsalahMessages); }, 5000);
+    setTimeout(() => { setInterval(startTime, 1000); messageController = new MessageController(afterPrayerMessages, morningEveningMessages, athanMessages, arkanAlsalahMessages, wajibatAlsalahMessages, mubtilatAlsalahMessages); }, 3000);
 
 
 }
@@ -77,7 +78,7 @@ function setupGlobalElements() {
     messageElement = document.getElementById("message");
     messageBodyElement = document.getElementById("messageBody");
     messageTitleElement = document.getElementById("messageTitle");
-
+    messageTitleContainerElement = document.getElementById("messageTitleContainer");
     footerElement = document.getElementById("footer");
 
 
@@ -145,6 +146,7 @@ function startTime() {
 
 
     hasSystemTimeChanged(now);
+    setNotificationHeightWidth();
 }
 function updatePrayerTimes(now) {
 
@@ -205,6 +207,8 @@ function updatePrayerTimes(now) {
         dhurTime.setSeconds(0);
         let prayerName = "الظهر";
         let currentDate = new Date();
+        if (testDate !== undefined)
+            currentDate = new Date(testDate.getTime());
         if (currentDate.toLocaleDateString(arabicLocale, { weekday: "long" }) == "الجمعة") {
             prayerName = "الجمعة";
             dhuhrNameElement.innerHTML = "الجمعة";
@@ -362,8 +366,31 @@ function changeMenuSectionSize(element) {
 }
 function rotate(element) {
     document.body.className = element.getAttribute("value");
+    displayDateTime();
+    setNotificationHeightWidth();
 }
+function displayDateTime() {
+    if (document.body.offsetWidth < 700) {
+        dateElement.style.display = "none";
+        clockElment.style.display = "none";
+        messageTitleContainerElement.style.justifyContent = "center";
+    } else {
+        messageTitleContainerElement.style.justifyContent = "space-between";
+        dateElement.style.display = "";
+        clockElment.style.display = "";
+    }
+}
+function setNotificationHeightWidth() {
+    let height = prayersElement.offsetHeight;
+    let width = prayersElement.offsetWidth;
 
+    if (height > 0 && width > 0) {
+
+        notificationsElement.style.minHeight = prayersElement.offsetHeight + "px";
+        notificationsElement.style.minWidth = prayersElement.offsetWidth + "px";
+    }
+
+}
 
 
 
