@@ -12,6 +12,8 @@ class MessageController {
     notificationTimeoutID;
     notificationEndTimeDate;
     notificationRegisteredTimeDate;
+    NotificationFadeInTimeoutID;
+    NotificationFadeOutTimeoutID;
     delayPerCharacter = 80; //milliseconds
     constructor(afterPrayerMessages = [], morningEveningMessages = [], athanMessages = [], arkanAlsalahMessages = [], wajibatAlsalahMessages = [], mubtilatAlsalahMessages = []) {
         this.afterPrayerMessages = afterPrayerMessages;
@@ -117,10 +119,10 @@ class MessageController {
     displayNotification(endDateTime, text = "NO TEXT") {
         clearInterval(messageController.notificationTimeoutID);
         messageController.notificationEndTimeDate = endDateTime;
-        messageController.notificationRegisteredTimeDate = testDate == undefined ? new Date() : testDate;
+        messageController.notificationRegisteredTimeDate = testDate == undefined ? new Date() : new Date(testDate.getTime());
         notificationElement.innerHTML = text;
-        notificationsElement.style.display = "flex";
-        prayersElement.style.display = "none";
+        //notificationsElement.style.display = "flex";
+        //prayersElement.style.display = "none";
         messageController.notificationTimeoutID = setInterval(function () {
 
             // Get today's date and time
@@ -146,10 +148,37 @@ class MessageController {
             }
             if (distance < -30000) {
                 clearInterval(messageController.notificationTimeoutID);
-                notificationsElement.style.display = "none";
-                prayersElement.style.display = "";
+
+                notificationsElement.classList.remove("fadeIn");
+                notificationsElement.classList.add("fadeOut");
+                //wait for fadout
+                messageController.NotificationFadeInTimeoutID = setTimeout(() => {
+                    notificationsElement.style.display = "none";
+                    prayersElement.style.display = "flex";
+                    clearTimeout(messageController.NotificationFadeInTimeoutID);
+                    prayersElement.classList.remove("fadeOut");
+                    prayersElement.classList.add("fadeIn");
+                }, 1800);
+
+
             }
         }, 1000);
+    }
+    displayNotificationAfterFadeout(endDateTime, text = "NO TEXT") {
+        clearTimeout(messageController.NotificationFadeInTimeoutID);
+        clearTimeout(messageController.NotificationFadeOutTimeoutID);
+        prayersElement.classList.remove("fadeIn");
+        prayersElement.classList.add("fadeOut");
+        //wait for fadout
+        messageController.NotificationFadeOutTimeoutID = setTimeout(() => {
+            prayersElement.style.display = "none";
+            notificationsElement.classList.remove("fadeOut");
+            notificationsElement.classList.add("fadeIn");
+            notificationsElement.style.display = "flex";
+            clearTimeout(messageController.NotificationFadeOutTimeoutID);
+
+            messageController.displayNotification(endDateTime, text);
+        }, 1800);
     }
     prayerPause() {
         clearTimeout(messageController.timeoutID);
