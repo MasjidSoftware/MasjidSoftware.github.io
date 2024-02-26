@@ -60,7 +60,7 @@ function main() {
     initializeMessageArrays();
     messageTitleElement.innerHTML = version;
     setTimeout(() => { setInterval(startTime, 1000); messageController = new MessageController(afterPrayerMessages, morningEveningMessages, athanMessages, arkanAlsalahMessages, wajibatAlsalahMessages, mubtilatAlsalahMessages); }, 3000);
-
+    displayDateTime();
 
 }
 function setupGlobalElements() {
