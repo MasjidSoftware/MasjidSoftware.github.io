@@ -24,10 +24,14 @@ class PrayerEvent {
         if (eventName == "الجمعة") {
             this.iqamaMinutesDelay = 0;//Second athan
             this.prayerMinutesDuration = 27; //Second Athan + Khutbah + Prayer
+        } else if (eventName == "العشاء" && entryDateTime.toLocaleDateString(arabicLocale, { month: "long" }) == "رمضان") {
+            this.iqamaMinutesDelay = 15;
+            this.prayerMinutesDuration = 27; //Esha + Traweeh prayer
         } else {
             this.iqamaMinutesDelay = iqamaMinutesDelay;
             this.prayerMinutesDuration = prayerMinutesDuration;
         }
+
         this.afterPrayerAthkarMinutesDuration = afterPrayerAthkarMinutesDuration;
         this.eventName = eventName;
         this.updateTimes(entryDateTime);
@@ -43,12 +47,15 @@ class PrayerEvent {
         if (this.eventName == "الجمعة") {
             this.athanTime.setMinutes(entryDateTime.getMinutes() - 60); // First Athan
         }
-        this.iqamaTime = new Date(entryDateTime.getTime());
-        this.iqamaTime.setMinutes(entryDateTime.getMinutes() + this.iqamaMinutesDelay);
-        this.prayerEndTime = new Date(entryDateTime.getTime());
-        this.prayerEndTime.setMinutes(entryDateTime.getMinutes() + this.iqamaMinutesDelay + this.prayerMinutesDuration);
-        this.afterPrayerAthkarEndTime = new Date(entryDateTime.getTime());
-        this.afterPrayerAthkarEndTime.setMinutes(entryDateTime.getMinutes() + this.iqamaMinutesDelay + this.prayerMinutesDuration + this.afterPrayerAthkarMinutesDuration);
+        if (this.eventName == "العشاء" && this.athanTime.toLocaleDateString(arabicLocale, { month: "long" }) == "رمضان") {
+            this.athanTime.setMinutes(entryDateTime.getMinutes() + 30);
+        }
+        this.iqamaTime = new Date(this.athanTime.getTime());
+        this.iqamaTime.setMinutes(this.athanTime.getMinutes() + this.iqamaMinutesDelay);
+        this.prayerEndTime = new Date(this.athanTime.getTime());
+        this.prayerEndTime.setMinutes(this.athanTime.getMinutes() + this.iqamaMinutesDelay + this.prayerMinutesDuration);
+        this.afterPrayerAthkarEndTime = new Date(this.athanTime.getTime());
+        this.afterPrayerAthkarEndTime.setMinutes(this.athanTime.getMinutes() + this.iqamaMinutesDelay + this.prayerMinutesDuration + this.afterPrayerAthkarMinutesDuration);
     }
 
 
@@ -74,7 +81,8 @@ class PrayerEvent {
             }, this.athanTime - now);
 
             this.athanNotificationTimeoutID = setTimeout((time, eventName) => {
-                messageController.displayNotification(time, eventName);
+                //messageController.displayNotification(time, eventName);
+                messageController.displayNotificationAfterFadeout(time, eventName);
                 messageController.startAthanMessages();
             }, notificationTime - now, this.athanTime, "أذان " + this.eventName);
         } else if (now < this.iqamaTime) {
@@ -106,7 +114,9 @@ class PrayerEvent {
             }, this.iqamaTime - now);
 
             this.iqamaNotificationTimeoutID = setTimeout((time, eventName) => {
-                messageController.displayNotification(time, eventName);
+                //messageController.displayNotification(time, eventName);
+                messageController.displayNotificationAfterFadeout(time, eventName);
+
             }, notificationTime - now, this.iqamaTime, (this.eventName != "الجمعة" ? "إقامة " : "أذان ") + this.eventName);
         } else if (now < this.prayerEndTime) {
             messageController.prayerPause();
