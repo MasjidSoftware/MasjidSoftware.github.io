@@ -35,35 +35,70 @@
         </div>
       </div>
     </div>
-    <div class="footer" id="footer">
+    <div class="footer" id="footer" onclick="showMenu()">
       <div id="prayers" class="prayer-group-container">
         <div class="prayer-group">
           <div class="prayer">
-            <span class="prayer-name">الفجر</span>
-            <span class="prayer-time" id="fajrTime">0:00</span>
+            <div class="prayer-times">
+              <span class="prayer-name">الفجر</span>
+            </div>
+            <div class="prayer-times">
+              <span class="prayer-time prayer-athan" id="fajrTime">0:00</span>
+              <span class="prayer-time prayer-iqama" id="fajrIqama">0:00</span>
+            </div>
           </div>
           <div id="shrooq" class="prayer">
-            <span class="prayer-name">الشروق</span>
-            <span class="prayer-time" id="shroogTime">0:00</span>
+            <div class="prayer-times">
+              <span class="prayer-name">الشروق</span>
+            </div>
+            <div class="prayer-times">
+              <span class="prayer-time prayer-athan" id="shroogTime">0:00</span>
+              <span class="prayer-time prayer-iqama" id="shrooqIqama"
+                >0:00</span
+              >
+            </div>
           </div>
           <div class="prayer">
-            <span class="prayer-name" id="dhuhr">الظهر</span>
-            <span class="prayer-time" id="dhuhrTime">0:00</span>
+            <div class="prayer-times">
+              <span class="prayer-name" id="dhuhr">الظهر</span>
+            </div>
+
+            <div class="prayer-times">
+              <span class="prayer-time prayer-athan" id="dhuhrTime">0:00</span>
+              <span class="prayer-time prayer-iqama" id="dhuhrIqama">0:00</span>
+            </div>
           </div>
         </div>
 
         <div class="prayer-group">
           <div class="prayer">
-            <span class="prayer-name">العصر</span>
-            <span class="prayer-time" id="asrTime">0:00</span>
+            <div class="prayer-times">
+              <span class="prayer-name">العصر</span>
+            </div>
+            <div class="prayer-times">
+              <span class="prayer-time prayer-athan" id="asrTime">0:00</span>
+              <span class="prayer-time prayer-iqama" id="asrIqama">0:00</span>
+            </div>
           </div>
           <div class="prayer">
-            <span class="prayer-name">المغرب</span>
-            <span class="prayer-time" id="magribTime">0:00</span>
+            <div class="prayer-times">
+              <span class="prayer-name">المغرب</span>
+            </div>
+            <div class="prayer-times">
+              <span class="prayer-time prayer-athan" id="magribTime">0:00</span>
+              <span class="prayer-time prayer-iqama" id="magribIqama"
+                >0:00</span
+              >
+            </div>
           </div>
           <div class="prayer">
-            <span class="prayer-name">العشاء</span>
-            <span class="prayer-time" id="eshaTime">0:00</span>
+            <div class="prayer-times">
+              <span class="prayer-name">العشاء</span>
+            </div>
+            <div class="prayer-times">
+              <span class="prayer-time prayer-athan" id="eshaTime">0:00</span>
+              <span class="prayer-time prayer-iqama" id="eshaIqama">0:00</span>
+            </div>
           </div>
         </div>
       </div>
@@ -72,8 +107,62 @@
         <div id="notificationTimer" class="notification-timer">0:00</div>
       </div>
     </div>
-    <div class="fullScreen">
-      <div class="fullScreenFexContainer"></div>
+    <div class="menu" id="menu" onclick="hideMenu()" style="display: none">
+      <div class="menuSection" onclick="event.stopPropagation();">
+        <div class="menuSectionTitle" onclick="changeMenuSectionSize(this)">
+          <span>+</span>
+          <span>تدوير الشاشة</span>
+        </div>
+        <div class="menuSectionBody">
+          <div>
+            <input
+              type="radio"
+              id="rotateNone"
+              name="rotation"
+              value=""
+              onclick="rotate(this)"
+            />
+            <label for="rotateNone">بلا تدوير</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="rotateBodyRight"
+              name="rotation"
+              value="rotateBodyRight"
+              onclick="rotate(this)"
+            />
+            <label for="rotateBodyRight">يمين</label><br />
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="rotateBodyLeft"
+              name="rotation"
+              value="rotateBodyLeft"
+              onclick="rotate(this)"
+            />
+            <label for="rotateBodyLeft">يسار</label>
+          </div>
+        </div>
+      </div>
+      <div class="menuSection" onclick="event.stopPropagation();">
+        <div class="menuSectionTitle" onclick="changeMenuSectionSize(this)">
+          <span>+</span>
+          <span>ألوان الصفحة</span>
+        </div>
+        <div class="menuSectionBody">
+          <div>
+            <input type="color" id="head" name="head" value="#e66465" />
+            <label for="head">تجربه</label>
+          </div>
+
+          <div>
+            <input type="color" id="body" name="body" value="#f6b73c" />
+            <label for="body">تجربه</label>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
