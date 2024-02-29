@@ -52,7 +52,7 @@
 
 .card {
   /* Add shadows to create the "card" effect */
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 2px 2px;
   transition-duration: 0s;
 }
 .card2 {
