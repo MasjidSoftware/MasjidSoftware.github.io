@@ -194,9 +194,9 @@ function updatePrayerTimes(now) {
         shrooqTime.setHours(hoursMinutes[0]);
         shrooqTime.setMinutes(hoursMinutes[1]);
         shrooqTime.setSeconds(0);
-        shrooqEvent = new PrayerEvent(shrooqTime, "الشروق", 0);
+        shrooqEvent = new PrayerEvent(shrooqTime, "الشروق", 15);
         shroogTimeElement.innerHTML = shrooqEvent.getAthanTime(); //getInArabicAMPM(dayPrayerTimes[1]);
-        shroogIqamaElement.innerHTML = shrooqEvent.getAthanTime(); //getInArabicAMPM(dayPrayerTimes[1]);
+        shroogIqamaElement.innerHTML = shrooqEvent.getIqamaTime(); //getInArabicAMPM(dayPrayerTimes[1]);
 
 
         //Manage dhuhr
