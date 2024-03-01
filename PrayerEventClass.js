@@ -50,12 +50,18 @@ class PrayerEvent {
         if (this.eventName == "العشاء" && this.athanTime.toLocaleDateString(arabicLocale, { month: "long" }) == "رمضان") {
             this.athanTime.setMinutes(entryDateTime.getMinutes() + 30);
         }
-        this.iqamaTime = new Date(this.athanTime.getTime());
-        this.iqamaTime.setMinutes(this.athanTime.getMinutes() + this.iqamaMinutesDelay);
-        this.prayerEndTime = new Date(this.athanTime.getTime());
-        this.prayerEndTime.setMinutes(this.athanTime.getMinutes() + this.iqamaMinutesDelay + this.prayerMinutesDuration);
-        this.afterPrayerAthkarEndTime = new Date(this.athanTime.getTime());
-        this.afterPrayerAthkarEndTime.setMinutes(this.athanTime.getMinutes() + this.iqamaMinutesDelay + this.prayerMinutesDuration + this.afterPrayerAthkarMinutesDuration);
+
+
+
+        this.iqamaTime = new Date(entryDateTime.getTime());
+        this.iqamaTime.setMinutes(entryDateTime.getMinutes() + this.iqamaMinutesDelay);
+        this.prayerEndTime = new Date(entryDateTime.getTime());
+        this.prayerEndTime.setMinutes(entryDateTime.getMinutes() + this.iqamaMinutesDelay + this.prayerMinutesDuration);
+        this.afterPrayerAthkarEndTime = new Date(entryDateTime.getTime());
+        this.afterPrayerAthkarEndTime.setMinutes(entryDateTime.getMinutes() + this.iqamaMinutesDelay + this.prayerMinutesDuration + this.afterPrayerAthkarMinutesDuration);
+
+
+
     }
 
 

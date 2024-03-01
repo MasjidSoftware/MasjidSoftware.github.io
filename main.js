@@ -3,9 +3,9 @@
 var englishLocale = "en-SA";
 var arabicLocale = "ar-SA";
 var version = "برمجيات المسجد نسخة ";
-version += "1.2.3";
+version += "1.2.4";
 var logging = false;
-var testDate = undefined//new Date(2024, 1, 26, 18, 20, 50);//Y,M(starts at 0),D
+var testDate = undefined; //new Date(2024, 2, 1, 12, 57, 50);//Y,M(starts at 0),D
 //-----End of Settings-------
 
 var mainElement;
