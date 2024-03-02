@@ -3,9 +3,13 @@
 var englishLocale = "en-SA";
 var arabicLocale = "ar-SA";
 var version = "برمجيات المسجد نسخة ";
-version += "1.2.4";
+version += "1.2.5";
 var logging = false;
-var testDate = undefined; //new Date(2024, 2, 1, 12, 57, 50);//Y,M(starts at 0),D
+var testDate = new Date(2024, 2, 11, 13, 57, 50);//Y,M(starts at 0),D
+var ramadanIshaAdjustedAthanBy = 0;
+var ramadanIshaAdjustedIqamaDelay = 15;
+var ramadanIshaAdjustedPrayerDuration = 27;
+
 //-----End of Settings-------
 
 var mainElement;
@@ -55,12 +59,17 @@ var menuElement;
 
 
 function main() {
-
     setupGlobalElements();
     initializeMessageArrays();
     messageTitleElement.innerHTML = version;
     setTimeout(() => { setInterval(startTime, 1000); messageController = new MessageController(afterPrayerMessages, morningEveningMessages, athanMessages, arkanAlsalahMessages, wajibatAlsalahMessages, mubtilatAlsalahMessages); }, 3000);
     displayDateTime();
+
+    /* Attempt to stop auto selection/highligh on TV */
+    document.activeElement.autofocus = false;
+    footerElement.autofocus = false;
+    document.activeElement.blur();
+    footerElement.blur();
 
 }
 function setupGlobalElements() {
