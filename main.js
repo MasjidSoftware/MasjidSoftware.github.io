@@ -3,12 +3,13 @@
 var englishLocale = "en-SA";
 var arabicLocale = "ar-SA";
 var version = "برمجيات المسجد نسخة ";
-version += "1.2.5";
+version += "1.2.6";
 var logging = false;
 var testDate = undefined;//new Date(2024, 2, 11, 13, 57, 50);//Y,M(starts at 0),D
 var ramadanIshaAdjustedAthanBy = 0;
 var ramadanIshaAdjustedIqamaDelay = 15;
 var ramadanIshaAdjustedPrayerDuration = 27;
+var ramadanFajrAdjustedIqamaDelay = 15;
 
 //-----End of Settings-------
 
