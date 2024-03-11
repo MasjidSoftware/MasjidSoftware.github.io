@@ -27,6 +27,8 @@ class PrayerEvent {
         } else if (eventName == "العشاء" && entryDateTime.toLocaleDateString(arabicLocale, { month: "long" }) == "رمضان") {
             this.iqamaMinutesDelay = ramadanIshaAdjustedIqamaDelay;
             this.prayerMinutesDuration = ramadanIshaAdjustedPrayerDuration; //Esha + Traweeh prayer
+        } else if (eventName == "الفجر" && entryDateTime.toLocaleDateString(arabicLocale, { month: "long" }) == "رمضان") {
+            this.iqamaMinutesDelay = ramadanFajrAdjustedIqamaDelay;
         } else {
             this.iqamaMinutesDelay = iqamaMinutesDelay;
             this.prayerMinutesDuration = prayerMinutesDuration;
@@ -50,6 +52,7 @@ class PrayerEvent {
         if (this.eventName == "العشاء" && this.athanTime.toLocaleDateString(arabicLocale, { month: "long" }) == "رمضان") {
             this.athanTime.setMinutes(entryDateTime.getMinutes() + ramadanIshaAdjustedAthanBy);
         }
+
 
 
 
