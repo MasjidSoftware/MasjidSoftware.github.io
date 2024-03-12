@@ -29,6 +29,8 @@ class PrayerEvent {
             this.prayerMinutesDuration = ramadanIshaAdjustedPrayerDuration; //Esha + Traweeh prayer
         } else if (eventName == "الفجر" && entryDateTime.toLocaleDateString(arabicLocale, { month: "long" }) == "رمضان") {
             this.iqamaMinutesDelay = ramadanFajrAdjustedIqamaDelay;
+        } else if (eventName == "المغرب" && entryDateTime.toLocaleDateString(arabicLocale, { month: "long" }) == "رمضان") {
+            this.iqamaMinutesDelay = ramadanMaghribAdjustedIqamaDelay;
         } else {
             this.iqamaMinutesDelay = iqamaMinutesDelay;
             this.prayerMinutesDuration = prayerMinutesDuration;
