@@ -80,21 +80,19 @@ class MessageController {
         mainElement.classList.add("fadeOut");
         //wait for fadout
 
-        messageController.timeoutID = setTimeout(() => {
-            clearTimeout(messageController.timeoutID);
-            messageBodyElement.innerHTML = messageController.currentMessages[messageController.currentMessagesIndex].elements;
+        clearTimeout(messageController.timeoutID);
+        messageBodyElement.innerHTML = messageController.currentMessages[messageController.currentMessagesIndex].elements;
 
-            mainElement.classList.remove("fadeOut");
-            mainElement.classList.add("fadeIn");
-            //---------------------------- CHECK
+        mainElement.classList.remove("fadeOut");
+        mainElement.classList.add("fadeIn");
+        //---------------------------- CHECK
 
-            messageTitleElement.innerHTML = messageController.currentMessages[messageController.currentMessagesIndex].title;
+        messageTitleElement.innerHTML = messageController.currentMessages[messageController.currentMessagesIndex].title;
 
-            messageIndexElement.innerHTML = EntoAr((messageController.currentMessagesIndex + 1) + " من " + (messageController.currentMessages.length));
-            //________________________________
+        messageIndexElement.innerHTML = EntoAr((messageController.currentMessagesIndex + 1) + " من " + (messageController.currentMessages.length));
+        //________________________________
 
-            messageController.nextMessage();
-        }, 1500);
+        messageController.nextMessage();
     }
     nextMessage() {
         let delay = messageController.currentMessages[messageController.currentMessagesIndex].messageCharacters * messageController.delayPerCharacter;
@@ -152,13 +150,11 @@ class MessageController {
                 notificationsElement.classList.remove("fadeIn");
                 notificationsElement.classList.add("fadeOut");
                 //wait for fadout
-                messageController.NotificationFadeInTimeoutID = setTimeout(() => {
-                    notificationsElement.style.display = "none";
-                    prayersElement.style.display = "flex";
-                    clearTimeout(messageController.NotificationFadeInTimeoutID);
-                    prayersElement.classList.remove("fadeOut");
-                    prayersElement.classList.add("fadeIn");
-                }, 1800);
+                notificationsElement.style.display = "none";
+                prayersElement.style.display = "flex";
+                clearTimeout(messageController.NotificationFadeInTimeoutID);
+                prayersElement.classList.remove("fadeOut");
+                prayersElement.classList.add("fadeIn");
 
 
             }
@@ -170,15 +166,13 @@ class MessageController {
         prayersElement.classList.remove("fadeIn");
         prayersElement.classList.add("fadeOut");
         //wait for fadout
-        messageController.NotificationFadeOutTimeoutID = setTimeout(() => {
-            prayersElement.style.display = "none";
-            notificationsElement.classList.remove("fadeOut");
-            notificationsElement.classList.add("fadeIn");
-            notificationsElement.style.display = "flex";
-            clearTimeout(messageController.NotificationFadeOutTimeoutID);
+        prayersElement.style.display = "none";
+        notificationsElement.classList.remove("fadeOut");
+        notificationsElement.classList.add("fadeIn");
+        notificationsElement.style.display = "flex";
+        clearTimeout(messageController.NotificationFadeOutTimeoutID);
 
-            messageController.displayNotification(endDateTime, text);
-        }, 1800);
+        messageController.displayNotification(endDateTime, text);
     }
     prayerPause() {
         clearTimeout(messageController.timeoutID);
