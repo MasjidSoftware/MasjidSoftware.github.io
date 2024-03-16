@@ -3,7 +3,7 @@
 var englishLocale = "en-SA";
 var arabicLocale = "ar-SA";
 var version = "برمجيات المسجد نسخة ";
-version += "1.2.9";
+version += "1.3.0";
 var logging = false;
 var testDate = undefined;//new Date(2024, 2, 11, 13, 57, 50);//Y,M(starts at 0),D
 var ramadanIshaAdjustedAthanBy = 0;
