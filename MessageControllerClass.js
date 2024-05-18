@@ -177,14 +177,12 @@ class MessageController {
     prayerPause() {
         clearTimeout(messageController.timeoutID);
         mainElement.classList.remove("fadeIn");
-        document.body.style.backgroundImage = "url('qr-code.png')"
         //footerElement.classList.remove("fadeIn");
         mainElement.classList.add("fadeOut");
         //footerElement.classList.add("fadeOut");
     }
     prayerUnpause() {
         mainElement.classList.remove("fadeOut");
-        document.body.style.backgroundImage = ""
         //footerElement.classList.remove("fadeOut");
         mainElement.classList.add("fadeIn");
         //footerElement.classList.add("fadeIn");
