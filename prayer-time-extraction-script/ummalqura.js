@@ -10,7 +10,9 @@ To get prayer time data go to :
     right click and click on "inspect" from the menu
     insert this script
     copy results it appropriate file
-    do it again for the next year to complete the few days that do not complete the year.
+    Delete past dates and keep today's Georgian date
+    From the site: do it again for the next hijri year
+    from the date in the end of the file until todays date complete the days using the newer Hijri year
     merge the two outputs based on dates manually.
 */
 
